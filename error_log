@@ -1,0 +1,3 @@
+[04-Aug-2021 08:03:34 UTC] PHP Warning:  require(/home/iconscart/public_html/test.iconscart.com/../vendor/autoload.php): failed to open stream: No such file or directory in /home/iconscart/public_html/test.iconscart.com/index.php on line 24
+[04-Aug-2021 08:03:34 UTC] PHP Warning:  require(/home/iconscart/public_html/test.iconscart.com/../vendor/autoload.php): failed to open stream: No such file or directory in /home/iconscart/public_html/test.iconscart.com/index.php on line 24
+[04-Aug-2021 08:03:34 UTC] PHP Fatal error:  require(): Failed opening required '/home/iconscart/public_html/test.iconscart.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/iconscart/public_html/test.iconscart.com/index.php on line 24
