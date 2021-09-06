@@ -41,22 +41,15 @@
     </span>
     <input style="display: none;" id="FileInput" name="booking_attachment" type="file"/>
 </label> -->
-        <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload" >
+        <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" id="image-upload" >
             @csrf
             <!-- <div>
             <h2>➕</h2><br>
             <span class="uploadp mt-2">
             </span>
             </div> -->
-            <div class="image-upload w-100 h-100">
-                <label for="file-input" class="d-flex justify-content-center align-items-center w-100 h-100">
-                <div>
-                    <span class="h2 d-block">➕</span>
-                    <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>
-                </div>
-                </label>
-                  <input id="file-input" name="icons_upload[]" multiple class="d-none" type="file"/>
-              </div>
+            <input name="icons_upload[]" multiple type="file"/>
+            <button type="submit" class="btn btn-sm btn-success">Upload</button>
         </form>
     </div>
   </div>
@@ -72,8 +65,5 @@
             acceptedFiles: ".jpeg,.jpg,.png,.gif"
         };
 </script>
-
-
-
 
 @endpush

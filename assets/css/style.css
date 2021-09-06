@@ -16,6 +16,10 @@ background: #FAFAFC;
 .active{
 background-color: #EBEDF5;
 }
+.row{
+    margin: 0px !important;
+}
+
 .gn-menu-main {
 position: fixed;
 top: 0;
@@ -566,10 +570,7 @@ margin-left: 5px;
 margin-top: 12px;
 }
 .uploadrightdiv{
-padding-top: 20px;
-padding-left: 20px;
-padding-right: 40px;
-padding-bottom: 50px;
+padding: 20px;
 }
 @media(max-width: 761px){
 .uploadrightdiv{
@@ -577,12 +578,14 @@ padding: 20px;
 }
 }
 .uplrin{
-border: 1px dashed #ebedf5;
-padding-top: 170px;
-padding-bottom: 170px;
+border: 1px dashed #b4bad6;
 background-color: #f5f6fa;
 cursor: pointer;
 border-radius: 12px;
+height: 400px;
+}
+.uplrin form div label{
+cursor: pointer;
 }
 .uplrin:hover{
 background-color: white;
