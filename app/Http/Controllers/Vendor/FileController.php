@@ -45,14 +45,14 @@ class FileController extends Controller
           }
           if ($request->file('icons_upload')) {
           }
-         
+
     //    dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
     }
 
-   
+
     public function photoUpload(Request $request)
     {
         $array             = array(".jpg",".jpeg",".png");
@@ -70,7 +70,7 @@ class FileController extends Controller
             $str            = str_replace($array, "", $imageName);
             $suggetedTags   = Suggested::create(['tags'=>$str]);
           }
-       
+
         $products = Product::create([
             'name'          =>  $fileEx,
             'image'         =>  $fileNames[0],
@@ -83,7 +83,7 @@ class FileController extends Controller
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
     }
-    
+
     public function vectorUpload(Request $request)
     {
         $category          = Category::where('name','vector')->first();
@@ -99,7 +99,7 @@ class FileController extends Controller
             $path         = $request->file('vector')->move(public_path('images/icons'),$fileEx);
             $suggetedTags = Suggested::create(['tags'=>$imageName]);
           }
-       
+
         $products           =   Product::create([
             'name'          =>  $fileEx,
             'image'         =>  $fileNames[0],
@@ -112,9 +112,9 @@ class FileController extends Controller
         }
     }
 
-    public function saveDrafts($id)
+    public function saveDrafts($id,Request $request)
     {
-        $products = Product::find($id);
+            $products = Product::find($id);
         $products->status = 1;
         $products->update();
         return redirect(url('home'));
@@ -128,90 +128,99 @@ class FileController extends Controller
         $products->update();
         return redirect(url('home'));
     }
-    
+
     public function iconsDraftShow()
     {
          $products = Product::where('status','1')->whereHas('category',function($q){
              $q->where('name','=','icon');
-         })->get();  
+         })->get();
         return view('icons.icon-drafts-show',compact('products'));
-    
+
     }
-    
+
     public function photosDraftShow()
     {
          $products = Product::where('status','1')->whereHas('category',function($q){
             $q->where('name','=','photo');
-        })->get();    
+        })->get();
         return view('illustrations.photo-draft-show',compact('products'));
-    
+
     }
-    
+
     public function vectorDraftShow()
     {
          $products = Product::where('status','1')->whereHas('category',function($q){
             $q->where('name','=','vector');
-        })->get();    
+        })->get();
         return view('vectors.vector-draft-show',compact('products'));
-    
+
     }
 
 
 
     public function iconeEdit($id)
     {
-        $products      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
+        $products=[];
+        $tagsSuggteds=[];
+        $product      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
             $q->where('name','=','icon');
-        })->first(); 
-        $tagsSuggteds  = explode(",",$products->tags); 
+        })->first();
+        array_push($products,$product);
+        $tagsSuggted  = explode(",",$product->tags);
+        array_push($tagsSuggteds,$tagsSuggted);
+
         return view('icons.drafts',compact('products','tagsSuggteds'));
-    
+
     }
-     
+
     public function photoEdit($id)
     {
         $products      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
             $q->where('name','=','photo');
-        })->first();  
-        $tagsSuggteds  = explode(",",$products->tags); 
+        })->first();
+        $tagsSuggteds  = explode(",",$products->tags);
         return view('icons.drafts',compact('products','tagsSuggteds'));
-    
+
     }
     public function vectorEdit($id)
     {
         $products      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
             $q->where('name','=','vector');
-        })->first();  
-        $tagsSuggteds  = explode(",",$products->tags); 
+        })->first();
+        $tagsSuggteds  = explode(",",$products->tags);
         return view('icons.drafts',compact('products','tagsSuggteds'));
-    
+
     }
     public function iconsReview()
     {
         $products      = Product::where('status','3')->with('category')->whereHas('category',function($q){
             $q->where('name','=','icon');
-        })->get(); 
+        })->get();
         return view('icons.reviewpacks',compact('products'));
-    
+
     }
 
     public function photoReview()
     {
         $products      = Product::where('status','3')->whereHas('category',function($q){
             $q->where('name','=','photo');
-        })->get();   
+        })->get();
         return view('illustrations.reviewpacks',compact('products'));
-    
+
     }
     public function vectorReview()
     {
         $products      = Product::where('status','3')->whereHas('category',function($q){
             $q->where('name','=','vector');
-        })->get();   
+        })->get();
         return view('vectors.reviewpacks',compact('products'));
-    
+
     }
 
-
+    public function iconDestroy($id)
+    {
+        Product::findOrFail($id)->delete();
+        return back();
+    }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.vendor') @section('title','Icon') @section('content')
 <div class="container-fluid indmain2">
-    <span class="uploadp">< My Icons</span><br />
+    <span class="uploadp"> My Icons</span><br />
     <div class="row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-12"><span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">1 Icons</span></div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
@@ -77,7 +77,7 @@
 
     <div class="row">
       @foreach ($products as $key=> $product)
-          
+
       <div class="col-lg-6 col-md-8 col-sm-12 col-12">
           <div class="draftouterdiv mt-4">
               <div class="text-center">
@@ -103,7 +103,7 @@
                       <span class="draftsp12">1/50 Tags (4 required)</span><br />
 
                        @foreach($tagsSuggteds[$key] as $tags)
-                          
+
                       <span class="badge badge-info">{{$tags}}</span>
                       @endforeach
 
@@ -112,7 +112,7 @@
                   <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                       <span class="draftsp11">Suggested tags</span><br />
                       @foreach($tagsSuggteds[$key] as $tags)
-                          
+
                       <span class="badge badge-info">{{$tags}}</span>
                       @endforeach
                   </div>

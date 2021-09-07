@@ -19,7 +19,7 @@
       <nav class="gn-menu-wrapper gn-menu-main gn-open-part">
         <div class="gn-scroller">
           <ul id="myDIV" class="gn-menu ">
-            
+
             <li><a href="index.html" class="gn-icon fa fa-home"></a>
           </li>
           <li><a href="icon.html" class="gn-icon  fa fa-eercast"></a>
@@ -43,7 +43,7 @@
 <!-- /gn-scroller -->
 </nav>
 <div class="container-fluid indmain2">
-<span class="uploadp">< My Icons</span><br>
+<span class="uploadp"> My Icons</span><br>
 <div class="row">
 <div class="col-lg-7 col-md-12 col-sm-12 col-12">
 <span class="indmainh1 mt-2">Under Review Packs</span>
@@ -72,9 +72,9 @@
   <div class="row">
     @foreach($products as $product)
     <div class="col-lg-2 col-md-2 col-sm-12 col-12 drtaall text-center">
-      <img src="{{url('images/icons/'.$product['name'])}}" style="width: 100%;height: 130px;border:1px solid black;border-radius: 8px;" alt="">
+      <img src="{{asset('public/images/icons/'.$product['name'])}}" style="width: 100%;height: 130px;border:1px solid black;border-radius: 8px;" alt="">
       <i class="fa fa-ellipsis-v alldraftfa"></i>
-      <span class="text-black">no name</span><span class="uploadp ml-1">(0 icons)</span>
+      <span class="text-black">{{$product['name']}}</span><span class="uploadp ml-1">(1 icons)</span>
     </div>
     @endforeach
   </div>

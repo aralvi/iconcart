@@ -44,6 +44,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::get('/icon/upload',function(){ return view('icons.iconupload');});
     Route::get('/icon-drafts-show','FileController@iconsDraftShow');
     Route::get('/icon-drafts-edit/{id}','FileController@iconeEdit')->name('icon.edit');
+    Route::get('/icon-drafts-delete/{id}','FileController@iconDestroy')->name('icon.delete');
     Route::get('/photo','DashboardController@photoCounter');
     Route::get('/photo/upload',function(){ return view('illustrations.illustrationsuplaod');});
     Route::get('/photo-draft-show','FileController@photosDraftShow');
@@ -60,7 +61,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::post('/vector/upload','FileController@vectorUpload')->name('vectors.drafts');
     Route::post('/drafts/save/{id}','FileController@saveDrafts')->name('save.drafts');
     Route::post('/drafts/submit-as-pack/{id}','FileController@saveToReview')->name('submit-as-pack.drafts');
-  
+
     Route::get('/product-delete/{id}','FileController@destroy')->name('product-delete');
 
     Route::get('/icons/needtoimprove',function(){
