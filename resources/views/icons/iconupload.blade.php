@@ -3,7 +3,7 @@
 @section('title','Iconupload')
 @section('content')
 <div class="container-fluid indmain2">
-  <span class="uploadp">< My Icons</span>
+  <span class="uploadp"> My Icons</span>
 <h1 class="indmainh1 mt-2">Upload Icons</h1>
 <div class="uploadupperdiv mt-4">
   <div class="row">
@@ -55,8 +55,9 @@
                     <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>
                 </div>
                 </label>
-                  <input id="file-input" name="icons_upload[]" multiple class="d-none" type="file"/>
+                  <input id="file-input" name="icons_upload[]" multiple class="invisible" type="file"/>
               </div>
+              <button type="submit">upload</button>
         </form>
     </div>
   </div>

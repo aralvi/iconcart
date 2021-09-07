@@ -16,28 +16,37 @@ class FileController extends Controller
     */
     public function uploadFile(Request $request)
     {
-        $category          = Category::where('name','icon')->first();
+        // dd($request->file('icons_upload'));
+        $category = Category::where('name','icon')->first();
         $request->validate([
-            'icons_upload' => 'required|image|mimes:png,svg,ico,eps,ai,pdf',
+            'icons_upload' => 'required|array',
+            'icons_upload.*' => 'required|image|mimes:png,svg,ico,eps,ai,pdf',
           ]);
+          $products=[];
+        $tagsSuggteds=[];
+          foreach ($request->file('icons_upload') as $key => $icon) {
+            //   dd($icon);
+              $imagePath    = $icon;
+              $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
+              $extension    = $icon->getClientOriginalExtension();
+              $fileNames    = explode(",",$imageName);
+              $fileEx       = $fileNames[0].'.'.$extension;
+              $path         = $icon->move(public_path('images/icons'),$fileEx);
+              $suggetedTags = Suggested::create(['tags'=>$imageName]);
+              $product           =   Product::create([
+                  'name'          =>  $fileEx,
+                  'image'         =>  $fileNames[0],
+                  'category_id'   =>  $category->id,
+                  'tags'          =>  $imageName,
+              ]);
+              array_push($products,$product);
+              $tagsSuggted      = explode(",",$imageName);
+              array_push($tagsSuggteds,$tagsSuggted);
+          }
           if ($request->file('icons_upload')) {
-            $imagePath    = $request->file('icons_upload');
-            $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension    = $request->file('icons_upload')->getClientOriginalExtension();
-            $fileNames    = explode(",",$imageName);
-            $fileEx       = $fileNames[0].'.'.$extension;
-            $path         = $request->file('icons_upload')->move(public_path('images/icons'),$fileEx);
-            $suggetedTags = Suggested::create(['tags'=>$imageName]);
           }
          
-       
-        $products           =   Product::create([
-            'name'          =>  $fileEx,
-            'image'         =>  $fileNames[0],
-            'category_id'   =>  $category->id,
-            'tags'          =>  $imageName,
-        ]);
-        $tagsSuggteds      = explode(",",$imageName);
+    //    dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
