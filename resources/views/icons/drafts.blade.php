@@ -264,10 +264,14 @@ TagsInput.prototype.addTag = function(string){
 
         for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
             if(tagInput.wrapper.childNodes[i] == tag)
-
+            let count = -1;
+            for(let item of tagInput1.arr){
+                count++;
+                if(item === tag.innerText.slice(0, -1)){
+                    tagInput1.arr.splice(count,1)
+                }
+            }
             $('#suggestedTags').append(tag)
-            // console.log(tag);
-                // tagInput.deleteTag(tag , i);
         }
             $('#suggestedTags').children('span.tag').removeClass('tag').addClass('cp badge badge-info')
             setTimeout(() => {
@@ -377,7 +381,7 @@ TagsInput.defaults = {
     wrapperClass : 'tags-input-wrapper',
     tagClass : 'tag',
     max : null,
-    duplicate: true
+    duplicate: false
 }
 
 window.TagsInput = TagsInput;
@@ -386,7 +390,7 @@ window.TagsInput = TagsInput;
 
 var tagInput1 = new TagsInput({
         selector: 'tag-input1',
-        duplicate : true,
+        duplicate : false,
         max : 10
     });
     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
@@ -396,6 +400,10 @@ var tagInput1 = new TagsInput({
    tagInput1.addData([e.innerText]);
     e.remove()
 }
+//  const appendTagNew = (e)=>{
+//    tagInput1.addData([e.innerText]);
+//     e.remove()
+// }
 
 
 </script>
