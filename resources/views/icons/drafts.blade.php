@@ -35,6 +35,13 @@
 .cp{
     cursor:pointer
 }
+
+#suggestedTags .badge{
+margin-right: 5px;
+}
+#suggestedTags .badge a{
+display:none;
+}
 </style>
 
 
@@ -151,12 +158,14 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                       <span class="draftsp11">Suggested tags</span><br />
-                      <span class="cp badge badge-info" onclick="appendTag(this)" >one <a class="d-none">x</a></span>
-                      <span class="cp badge badge-info" onclick="appendTag(this)" >two <a class="d-none">x</a></span>
-                      <span class="cp badge badge-info" onclick="appendTag(this)" >three <a class="d-none">x</a></span>
-                      <span class="cp badge badge-info" onclick="appendTag(this)" >four <a class="d-none">x</a></span>
-                      <span class="cp badge badge-info" onclick="appendTag(this)" >five <a class="d-none">x</a></span>
-                      <span class="cp badge badge-info" onclick="appendTag(this)" >six <a class="d-none">x</a></span>
+                      <div id="suggestedTags">
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >one</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >two</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >three</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >four</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >five</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >six</span>
+                        </div>
                       <!-- @foreach($tagsSuggteds[$key] as $tags)
                       <span class="badge badge-info">{{$tags}}</span>
                       @endforeach -->
@@ -197,10 +206,7 @@
     });
 
 
-const appendTag = (e)=>{
-    tagInput1.addData([e.innerText]);
-    e.remove()
-}
+
 
 (function(){
 
@@ -258,8 +264,16 @@ TagsInput.prototype.addTag = function(string){
 
         for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
             if(tagInput.wrapper.childNodes[i] == tag)
-                tagInput.deleteTag(tag , i);
+
+            $('#suggestedTags').append(tag)
+            // console.log(tag);
+                // tagInput.deleteTag(tag , i);
         }
+            $('#suggestedTags').children('span.tag').removeClass('tag').addClass('cp badge badge-info')
+            setTimeout(() => {
+                $('#suggestedTags').children('span.cp').attr('onclick','appendTag(this)')
+                
+            }, 1000);
     })
 
 
@@ -363,7 +377,7 @@ TagsInput.defaults = {
     wrapperClass : 'tags-input-wrapper',
     tagClass : 'tag',
     max : null,
-    duplicate: false
+    duplicate: true
 }
 
 window.TagsInput = TagsInput;
@@ -372,10 +386,16 @@ window.TagsInput = TagsInput;
 
 var tagInput1 = new TagsInput({
         selector: 'tag-input1',
-        duplicate : false,
+        duplicate : true,
         max : 10
     });
     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
+
+
+ const appendTag = (e)=>{
+   tagInput1.addData([e.innerText]);
+    e.remove()
+}
 
 
 </script>
