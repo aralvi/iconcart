@@ -14,16 +14,16 @@
                     </button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2"><a href="{{route('product-delete',$products[0]['id'])}}"></a> Delete Draft</button>
+                    <button class="btn  uploadexmbt2"><a href="{{route('product-delete',$products[0]['id'])}}"></a> Delete Draft</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2">Upload More</button>
+                    <button class="btn  uploadexmbt2">Upload More</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2" id="advandedOption">Advanced Options</button>
+                    <button class="btn  uploadexmbt2" id="advandedOption">Advanced Options</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt3">Submit as Individual</button>
+                    <button class="btn  uploadexmbt2">Submit as Individual</button>
                 </div>
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2">
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div class="row" id="advancedDiv">
+    <div class="row" id="advancedDiv" style="display: none;">
         <div class="col-md-12 mt-3">
             <div class="card-body bg-white">
                 <h3>Advanced options</h3>
@@ -78,7 +78,7 @@
     <div class="row">
       @foreach ($products as $key=> $product)
 
-      <div class="col-lg-6 col-md-8 col-sm-12 col-12">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-12">
           <div class="draftouterdiv mt-4">
               <div class="text-center">
                   <img src="{{url('public/images/icons/'.$product['name'])}}" class="draftimg1" alt="" />
@@ -86,20 +86,20 @@
 
               <div class="row" style="border-top: 1px solid #d8dbeb; border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
                   <input type="hidden" class="draftin2" value="{{$product['id']}}" name="id" id="" />
-                  <div class="col-lg-10 col-md-10 col-sm-9 col-9">
+                  <div class="col-lg-10 col-md-10 col-sm-9 col-9 px-0">
                       <input type="text" class="draftin1" value="{{$product['name']}}" name="" id="" />
                   </div>
-                  <div class="col-lg-2 col-md-2 col-sm-3 col-3">
+                  <div class="col-lg-2 col-md-2 col-sm-3 col-3 px-0">
                       <input type="text" class="draftin2" value="$10" name="" id="" />
                   </div>
               </div>
               <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
                   <div class="col-lg-12 col-md-12 col-sm-2 col-2">
-                      <input type="text" class="draftin3" value="Description" name="" id="" />
+                      <input type="text" class="draftin3" placeholder="Description" name="" id="" />
                   </div>
               </div>
               <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
-                  <div class="col-lg-8 col-md-8 col-sm-12 col-12" style="height: 150px; overflow-y: scroll;">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 150px; overflow-y: scroll;">
                       <span class="draftsp12">1/50 Tags (4 required)</span><br />
 
                        @foreach($tagsSuggteds[$key] as $tags)
@@ -107,9 +107,9 @@
                       <span class="badge badge-info">{{$tags}}</span>
                       @endforeach
 
-                      <input class="input-tags" data-role="tagsinput" />
+                      <textarea class="input-tags" data-role="tagsinput" ></textarea>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                       <span class="draftsp11">Suggested tags</span><br />
                       @foreach($tagsSuggteds[$key] as $tags)
 
@@ -121,14 +121,14 @@
                   <div class="uploadrowbt3">
                       <div class="uploadexmbt3nw"><img src="assets/images/tick.1318965.svg" alt="" /> JSON</div>
                   </div>
-                  <div class="uploadrowbt3">
-                      <button class="btn uploadexmbt3">+ JSON</button>
+                  <div class="uploadrowbt2">
+                      <button class="btn uploadexmbt2 border">+ JSON</button>
                   </div>
-                  <div class="uploadrowbt3">
-                      <button class="btn uploadexmbt3">+ AEP</button>
+                  <div class="uploadrowbt2">
+                      <button class="btn uploadexmbt2 border">+ AEP</button>
                   </div>
-                  <div class="uploadrowbt3">
-                      <button class="btn uploadexmbt3">+ ZIP</button>
+                  <div class="uploadrowbt2">
+                      <button class="btn uploadexmbt2 border">+ ZIP</button>
                   </div>
               </div>
           </div>

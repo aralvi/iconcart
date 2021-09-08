@@ -37,7 +37,7 @@
     </div>
 </div>
 </div>          
-<div class="container">
+<div class="container" style="max-width: 1450px;">
             <nav class="gn-menu-wrapper gn-menu-main gn-open-part">
                 <div class="gn-scroller">
                     <ul id="myDIV" class="gn-menu ">
