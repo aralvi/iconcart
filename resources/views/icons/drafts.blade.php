@@ -133,11 +133,15 @@ display:none;
 
               <div class="row" style="border-top: 1px solid #d8dbeb; border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
                   <input type="hidden" class="draftin2" value="{{$product['id']}}" name="id" id="" />
-                  <div class="col-lg-10 col-md-10 col-sm-9 col-9 px-0">
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-9 px-0 border-right">
                       <input type="text" class="draftin1" value="{{$product['name']}}" name="" id="" />
                   </div>
-                  <div class="col-lg-2 col-md-2 col-sm-3 col-3 px-0">
-                      <input type="text" class="draftin2" value="$10" name="" id="" />
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-3 pr-0">
+                      <div class="d-flex justify-content-between align-items-center">
+                          <span>$</span>
+                          <input type="text" class="draftin2 border-0 pl-1" value="10" name="" id="" />
+
+                      </div>
                   </div>
               </div>
               <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
