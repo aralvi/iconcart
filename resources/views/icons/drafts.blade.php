@@ -264,13 +264,16 @@ TagsInput.prototype.addTag = function(string){
 
         for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
             if(tagInput.wrapper.childNodes[i] == tag)
+            tagInput1.arr
             let count = -1;
+            // console.log(tag.innerText.slice(0, -1));
             for(let item of tagInput1.arr){
                 count++;
                 if(item === tag.innerText.slice(0, -1)){
                     tagInput1.arr.splice(count,1)
                 }
             }
+            // $(tag).attr('onclick','appendTag(this)')
             $('#suggestedTags').append(tag)
         }
             $('#suggestedTags').children('span.tag').removeClass('tag').addClass('cp badge badge-info')
