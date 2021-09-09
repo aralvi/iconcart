@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Suggested;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class FileController extends Controller
 {
