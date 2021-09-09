@@ -268,13 +268,13 @@ TagsInput.prototype.addTag = function(string){
 
         for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
             if(tagInput.wrapper.childNodes[i] == tag)
-            tagInput1.arr
+            tagInput.arr
             let count = -1;
             // console.log(tag.innerText.slice(0, -1));
-            for(let item of tagInput1.arr){
+            for(let item of tagInput.arr){
                 count++;
                 if(item === tag.innerText.slice(0, -1)){
-                    tagInput1.arr.splice(count,1)
+                    tagInput.arr.splice(count,1)
                 }
             }
             // $(tag).attr('onclick','appendTag(this)')
@@ -395,18 +395,18 @@ window.TagsInput = TagsInput;
 
 })();
 
-var tagInput1 = new TagsInput({
+var tagInput = new TagsInput({
         selector: 'tag-input1',
         duplicate : false,
         max : 10
     });
     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
-
-
- const appendTag = (e)=>{
-   tagInput1.addData([e.innerText]);
+ const appendTag = (e , id)=>{
+   tagInput.addData([e.innerText]);
     e.remove()
 }
+
+
 //  const appendTagNew = (e)=>{
 //    tagInput1.addData([e.innerText]);
 //     e.remove()
