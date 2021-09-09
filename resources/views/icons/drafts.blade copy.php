@@ -395,34 +395,34 @@ window.TagsInput = TagsInput;
 
 })();
 
-// var tagInput = new TagsInput({
-//         selector: 'tag-input1',
-//         duplicate : false,
-//         max : 10
-//     });
-//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
-//  const appendTag = (e , id)=>{
-//    tagInput.addData([e.innerText]);
-//     e.remove()
-// }
-
-
-
-
-
-var tagInput= '';
-
-//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
- const appendTag = (e , id)=>{
-     tagInput = new TagsInput({
-        selector: id,
+var tagInput = new TagsInput({
+        selector: 'tag-input1',
         duplicate : false,
         max : 10
     });
-
+    // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
+ const appendTag = (e , id)=>{
    tagInput.addData([e.innerText]);
     e.remove()
 }
+
+
+
+
+
+// var tagInput= '';
+
+//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
+//  const appendTag = (e , id)=>{
+//      tagInput = new TagsInput({
+//         selector: id,
+//         duplicate : false,
+//         max : 10
+//     });
+
+//    tagInput.addData([e.innerText]);
+//     e.remove()
+// }
 
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.vendor') @section('title','Icon') @section('content')
 
 <style>
-
+    
 .tags-input-wrapper{
     background: transparent;
     padding: 10px;
@@ -158,17 +158,17 @@ display:none;
                       @endforeach
 
                       <!-- <textarea class="input-tags" data-role="tagsinput" ></textarea> -->
-                      <textarea class="input-tags" data-role="tagsinput"  id="tag-input_{{$key}}" ></textarea>
+                      <textarea class="input-tags" data-role="tagsinput"  id="tag-input1" ></textarea>
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                       <span class="draftsp11">Suggested tags</span><br />
                       <div id="suggestedTags">
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >one</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >two</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >three</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >four</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >five</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >six</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >one</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >two</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >three</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >four</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >five</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >six</span>
                         </div>
                       <!-- @foreach($tagsSuggteds[$key] as $tags)
                       <span class="badge badge-info">{{$tags}}</span>
@@ -229,7 +229,7 @@ TagsInput.prototype.init = function(opts){
 
     if(this.initialized)
         this.destroy();
-
+        
     if(!(this.orignal_input = document.getElementById(this.options.selector)) ){
         console.error("tags-input couldn't find an element with the specified ID");
         return this;
@@ -260,7 +260,7 @@ TagsInput.prototype.addTag = function(string){
 
     var closeIcon = document.createElement('a');
     closeIcon.innerHTML = '&times;';
-
+    
     // delete the tag when icon is clicked
     closeIcon.addEventListener('click' , function(e){
         e.preventDefault();
@@ -268,13 +268,13 @@ TagsInput.prototype.addTag = function(string){
 
         for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
             if(tagInput.wrapper.childNodes[i] == tag)
-            tagInput.arr
+            tagInput1.arr
             let count = -1;
             // console.log(tag.innerText.slice(0, -1));
-            for(let item of tagInput.arr){
+            for(let item of tagInput1.arr){
                 count++;
                 if(item === tag.innerText.slice(0, -1)){
-                    tagInput.arr.splice(count,1)
+                    tagInput1.arr.splice(count,1)
                 }
             }
             // $(tag).attr('onclick','appendTag(this)')
@@ -283,7 +283,7 @@ TagsInput.prototype.addTag = function(string){
             $('#suggestedTags').children('span.tag').removeClass('tag').addClass('cp badge badge-info')
             setTimeout(() => {
                 $('#suggestedTags').children('span.cp').attr('onclick','appendTag(this)')
-
+                
             }, 1000);
     })
 
@@ -309,7 +309,7 @@ TagsInput.prototype.anyErrors = function(string){
         console.log('max tags limit reached');
         return true;
     }
-
+    
     if(!this.options.duplicate && this.arr.indexOf(string) != -1 ){
         console.log('duplicate found " '+string+' " ')
         return true;
@@ -318,10 +318,10 @@ TagsInput.prototype.anyErrors = function(string){
     return false;
 }
 
-// Add tags programmatically
+// Add tags programmatically 
 TagsInput.prototype.addData = function(array){
     var plugin = this;
-
+    
     array.forEach(function(string){
         plugin.addTag(string);
     })
@@ -340,11 +340,11 @@ TagsInput.prototype.destroy = function(){
 
     delete this.orignal_input;
     var self = this;
-
+    
     Object.keys(this).forEach(function(key){
         if(self[key] instanceof HTMLElement)
             self[key].remove();
-
+        
         if(key != 'options')
             delete self[key];
     });
@@ -363,12 +363,12 @@ function init(tags){
 // initialize the Events
 function initEvents(tags){
     tags.wrapper.addEventListener('click' ,function(){
-        tags.input.focus();
+        tags.input.focus();           
     });
-
+    
 
     tags.input.addEventListener('keydown' , function(e){
-        var str = tags.input.value.trim();
+        var str = tags.input.value.trim(); 
 
         if( !!(~[9 , 13 , 188].indexOf( e.keyCode ))  )
         {
@@ -395,46 +395,24 @@ window.TagsInput = TagsInput;
 
 })();
 
-// var tagInput = new TagsInput({
-//         selector: 'tag-input1',
-//         duplicate : false,
-//         max : 10
-//     });
-//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
-//  const appendTag = (e , id)=>{
-//    tagInput.addData([e.innerText]);
-//     e.remove()
-// }
 
 
+let currentTextArea = '';
 
-
-
-var tagInput= '';
-
-//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
- const appendTag = (e , id)=>{
-     tagInput = new TagsInput({
-        selector: id,
+ const appendTag = (e, id)=>{
+    currentTextArea = id
+   tagInput1.addData([e.innerText]);
+    e.remove()
+}
+var tagInput1 = new TagsInput({
+        selector: 'tag-input1',
         duplicate : false,
         max : 10
     });
-
-   tagInput.addData([e.innerText]);
-    e.remove()
-}
+    // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
 
 
 
-
-// let textAreaTags = document.querySelectorAll('.input-tags');
-// for(let singleTag of textAreaTags){
-// // var tagInput = new TagsInput({
-// //         selector: singleTag.id,
-// //         duplicate : false,
-// //         max : 10
-// //     });
-// }
 </script>
 
 @endpush
