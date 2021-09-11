@@ -1,9 +1,7 @@
 @extends('layouts.vendor') @section('title','Icon') @section('content')
- <link rel="stylesheet" href="{{asset('public/asset/tagify.css')}}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="{{asset('public/asset/jQuery.tagify.min.js')}}"></script>
-<style>
 
+<style>
+    
 .tags-input-wrapper{
     background: transparent;
     padding: 10px;
@@ -44,15 +42,6 @@ margin-right: 5px;
 #suggestedTags .badge a{
 display:none;
 }
-
-
-/* description tag css code start */
-
-/* description tag css code end */
-
-
-
-
 </style>
 
 
@@ -103,23 +92,18 @@ display:none;
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Assets</label>
-                            <input type="text" class="form-control" id="assets"/>
+                            <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Assets Price</label>
-                            <input type="number" class="form-control" id="assetPrice"/>
+                            <input type="number" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-4 mt-3">
                         <div class="form-group">
-                            <!-- <div class="tag-field js-tags">
-                                <input class="js-tag-input" placeholder="Enter new tag..." id="textInput"/>
-                            </div> -->
-                            {{-- <textarea type="text" class="form-control" placeholder="description"></textarea> --}}
-                        <textarea name='basic' class="form-control"  autofocus rows="5" id="assetTags">tag1, tag2</textarea>
-
+                            <textarea type="text" class="form-control" placeholder="description"></textarea>
                         </div>
                     </div>
                 </div>
@@ -127,12 +111,11 @@ display:none;
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="">Asset Description</label>
-                            <input type="text" class="form-control" id="assetDescription"/>
-
+                            <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-4 mt-4">
-                        <button class="btn btn-primary btn-md pull-right" onclick="addDataToItem()">Apply to all items</button>
+                        <button class="btn btn-primary btn-md pull-right">Apply to all items</button>
                     </div>
                 </div>
             </div>
@@ -151,19 +134,19 @@ display:none;
               <div class="row" style="border-top: 1px solid #d8dbeb; border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
                   <input type="hidden" class="draftin2" value="{{$product['id']}}" name="id" id="" />
                   <div class="col-lg-9 col-md-9 col-sm-9 col-9 px-0 border-right">
-                      <input type="text" class="draftin1" value="{{$product['name']}}" name="" id="productTitle" />
+                      <input type="text" class="draftin1" value="{{$product['name']}}" name="" id="" />
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-3 col-3 pr-0">
                       <div class="d-flex justify-content-between align-items-center">
                           <span>$</span>
-                          <input type="text" class="draftin2 border-0 pl-1" value="10" name="" id="productPrice" />
+                          <input type="text" class="draftin2 border-0 pl-1" value="10" name="" id="" />
 
                       </div>
                   </div>
               </div>
               <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
                   <div class="col-lg-12 col-md-12 col-sm-2 col-2">
-                      <input type="text" class="draftin3" placeholder="Description" name="" id="productDescription" />
+                      <input type="text" class="draftin3" placeholder="Description" name="" id="" />
                   </div>
               </div>
               <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
@@ -175,17 +158,17 @@ display:none;
                       @endforeach
 
                       <!-- <textarea class="input-tags" data-role="tagsinput" ></textarea> -->
-                      <textarea class="input-tags" data-role="tagsinput"  id="tag-input_{{$key}}" ></textarea>
+                      <textarea class="input-tags" data-role="tagsinput"  id="tag-input1" ></textarea>
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                       <span class="draftsp11">Suggested tags</span><br />
                       <div id="suggestedTags">
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >one</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >two</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >three</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >four</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >five</span>
-                          <span class="cp badge badge-info" onclick="appendTag(this,'tag-input_{{$key}}')" >six</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >one</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >two</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >three</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >four</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >five</span>
+                          <span class="cp badge badge-info" onclick="appendTag(this)" >six</span>
                         </div>
                       <!-- @foreach($tagsSuggteds[$key] as $tags)
                       <span class="badge badge-info">{{$tags}}</span>
@@ -228,99 +211,6 @@ display:none;
 
 
 
-const addDataToItem=()=>{
-    if(assets.value){
-        productTitle.value = assets.value
-    }
-    if(assetPrice.value){
-        productPrice.value = assetPrice.value
-
-    }
-    if (assetDescription.value) {
-        productDescription.value = assetDescription.value
-    }
-console.log($('#assetTags').val());
-}
-
-// description tag code Start
-var tags = [];
-var $container = document.querySelector('div');
-var $input = document.querySelector('input');
-var $tags = document.querySelector('.js-tags');
-
-$container.addEventListener('click', function() {
-  $input.focus();
-});
-
-$container.addEventListener('keydown', function(evt) {
-  if ( !evt.target.matches('.js-tag-input') ) {
-    return;
-  }
-
-  if ( evt.keyCode !== 13 ) {
-    return;
-  }
-
-  var value = String(evt.target.value);
-
-  if ( !value.length || value.length > 20 || tags.length === 3 ) {
-    return;
-  }
-
-  tags.push(evt.target.value);
-  $input.value = '';
-  render(tags, $tags);
-});
-
-$container.addEventListener('keydown', function(evt) {
-  if ( !evt.target.matches('.js-tag-input') ) {
-    return;
-  }
-
-  if ( evt.keyCode !== 8 ) {
-    return;
-  }
-
-  if ( String(evt.target.value).length ) {
-    return;
-  }
-
-  tags = tags.slice(0, tags.length - 1);
-  $input.value = '';
-  render(tags, $tags);
-});
-
-$container.addEventListener('click', function(evt) {
-  if ( evt.target.matches('.js-tag-close') || evt.target.matches('.js-tag') ) {
-    tags = tags.filter(function(tag, i) {
-      return i != evt.target.getAttribute('data-index');
-    });
-    render(tags, $tags);
-  }
-}, true);
-
-
-function render(tags, el) {
-  el.innerHTML = tags.map(function(tag, i) {
-    return (
-      '<div class="tag js-tag" data-index="' + i + '">' +
-        tag +
-        '<span class="tag-close js-tag-close" data-index="' + i + '">×</span>' +
-      '</div>'
-   );
-  }).join('') + (tags.length === 3 ? '' : '<input placeholder="Enter new tag..." class="js-tag-input">')
-  ;
-
-  $container.querySelector('.js-tag-input').focus();
-    $("#textInput").css("width","100%")
-
-}
-
-// description tag code end
-
-
-
-
 
 (function(){
 
@@ -339,7 +229,7 @@ TagsInput.prototype.init = function(opts){
 
     if(this.initialized)
         this.destroy();
-
+        
     if(!(this.orignal_input = document.getElementById(this.options.selector)) ){
         console.error("tags-input couldn't find an element with the specified ID");
         return this;
@@ -370,7 +260,7 @@ TagsInput.prototype.addTag = function(string){
 
     var closeIcon = document.createElement('a');
     closeIcon.innerHTML = '&times;';
-
+    
     // delete the tag when icon is clicked
     closeIcon.addEventListener('click' , function(e){
         e.preventDefault();
@@ -378,13 +268,13 @@ TagsInput.prototype.addTag = function(string){
 
         for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
             if(tagInput.wrapper.childNodes[i] == tag)
-            tagInput.arr
+            tagInput1.arr
             let count = -1;
             // console.log(tag.innerText.slice(0, -1));
-            for(let item of tagInput.arr){
+            for(let item of tagInput1.arr){
                 count++;
                 if(item === tag.innerText.slice(0, -1)){
-                    tagInput.arr.splice(count,1)
+                    tagInput1.arr.splice(count,1)
                 }
             }
             // $(tag).attr('onclick','appendTag(this)')
@@ -393,7 +283,7 @@ TagsInput.prototype.addTag = function(string){
             $('#suggestedTags').children('span.tag').removeClass('tag').addClass('cp badge badge-info')
             setTimeout(() => {
                 $('#suggestedTags').children('span.cp').attr('onclick','appendTag(this)')
-
+                
             }, 1000);
     })
 
@@ -419,7 +309,7 @@ TagsInput.prototype.anyErrors = function(string){
         console.log('max tags limit reached');
         return true;
     }
-
+    
     if(!this.options.duplicate && this.arr.indexOf(string) != -1 ){
         console.log('duplicate found " '+string+' " ')
         return true;
@@ -428,10 +318,10 @@ TagsInput.prototype.anyErrors = function(string){
     return false;
 }
 
-// Add tags programmatically
+// Add tags programmatically 
 TagsInput.prototype.addData = function(array){
     var plugin = this;
-
+    
     array.forEach(function(string){
         plugin.addTag(string);
     })
@@ -450,11 +340,11 @@ TagsInput.prototype.destroy = function(){
 
     delete this.orignal_input;
     var self = this;
-
+    
     Object.keys(this).forEach(function(key){
         if(self[key] instanceof HTMLElement)
             self[key].remove();
-
+        
         if(key != 'options')
             delete self[key];
     });
@@ -473,12 +363,12 @@ function init(tags){
 // initialize the Events
 function initEvents(tags){
     tags.wrapper.addEventListener('click' ,function(){
-        tags.input.focus();
+        tags.input.focus();           
     });
-
+    
 
     tags.input.addEventListener('keydown' , function(e){
-        var str = tags.input.value.trim();
+        var str = tags.input.value.trim(); 
 
         if( !!(~[9 , 13 , 188].indexOf( e.keyCode ))  )
         {
@@ -505,55 +395,24 @@ window.TagsInput = TagsInput;
 
 })();
 
-// var tagInput = new TagsInput({
-//         selector: 'tag-input1',
-//         duplicate : false,
-//         max : 10
-//     });
-//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
-//  const appendTag = (e , id)=>{
-//    tagInput.addData([e.innerText]);
-//     e.remove()
-// }
 
 
+let currentTextArea = '';
 
-
-
-var tagInput= '';
-
-//     // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
- const appendTag = (e , id)=>{
-     tagInput = new TagsInput({
-        selector: id,
+ const appendTag = (e, id)=>{
+    currentTextArea = id
+   tagInput1.addData([e.innerText]);
+    e.remove()
+}
+var tagInput1 = new TagsInput({
+        selector: 'tag-input1',
         duplicate : false,
         max : 10
     });
-
-   tagInput.addData([e.innerText]);
-    e.remove()
-}
+    // tagInput1.addData(['TagOne' , 'TagTwo' , 'TagThree'])
 
 
 
-
-// let textAreaTags = document.querySelectorAll('.input-tags');
-// for(let singleTag of textAreaTags){
-// // var tagInput = new TagsInput({
-// //         selector: singleTag.id,
-// //         duplicate : false,
-// //         max : 10
-// //     });
-// }
-</script>
-<script data-name="basic">
-(function(){
-// The DOM element you wish to replace with Tagify
-var input = document.querySelector('textarea[name=basic]');
-
-// initialize Tagify on the above input node reference
-new Tagify(input)
-})()
 </script>
 
 @endpush
