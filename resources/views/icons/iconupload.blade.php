@@ -232,30 +232,13 @@
 </label> -->
         <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload" >
             @csrf
-            <!-- <div>
-            <h2>➕</h2><br>
-            <span class="uploadp mt-2">
-            </span>
-            </div> -->
-            {{-- <div class=" image-upload w-100 h-100">
-                <label for="file-input" class="d-flex justify-content-center align-items-center w-100 h-100">
-                <div>
-                    <span class="h2 d-block">➕</span>
-                    <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>
-                </div>
-                </label>
-                  <input id="file-input" name="icons_upload[]" multiple class="invisible" type="file" drop-here/>
-                  <div class="text text-drop">drop here</div>
 
-              </div> --}}
               <div class="upload">
   <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here">
-  {{-- <div class="text text-drop">➕</div> --}}
   <div class="text text-drop">
                     <span class="h2 d-block">➕</span>
                     <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>
                 </div>
-  {{-- <div class="text text-dro">drop here your icons</div> --}}
   <div class="text text-upload"></div>
   <svg class="progress-wrapper" width="300" height="300">
     <circle class="progress" r="115" cx="150" cy="150"></circle>
@@ -265,7 +248,6 @@
   </svg>
 </div>
 
-              {{-- <button type="submit">upload</button> --}}
         </form>
     </div>
   </div>
@@ -308,9 +290,9 @@ function start() {
   setTimeout(() =>
    this.classList.add("done")
    , 3000);
-//   setTimeout(() =>
-//    $('#image-upload').submit()
-//    , 5000);
+  setTimeout(() =>
+   $('#image-upload').submit()
+   , 5000);
 }
 </script>
 
