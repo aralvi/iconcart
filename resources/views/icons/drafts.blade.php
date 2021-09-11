@@ -1,5 +1,7 @@
 @extends('layouts.vendor') @section('title','Icon') @section('content')
-
+ <link rel="stylesheet" href="{{asset('public/asset/tagify.css')}}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{{asset('public/asset/jQuery.tagify.min.js')}}"></script>
 <style>
 
 .tags-input-wrapper{
@@ -115,7 +117,9 @@ display:none;
                             <!-- <div class="tag-field js-tags">
                                 <input class="js-tag-input" placeholder="Enter new tag..." id="textInput"/>
                             </div> -->
-                            <textarea type="text" class="form-control" placeholder="description"></textarea>
+                            {{-- <textarea type="text" class="form-control" placeholder="description"></textarea> --}}
+                        <textarea name='basic' class="form-control"  autofocus rows="5">tag1, tag2</textarea>
+
                         </div>
                     </div>
                 </div>
@@ -124,6 +128,7 @@ display:none;
                         <div class="form-group">
                             <label for="">Asset Description</label>
                             <input type="text" class="form-control" id="assetDescription"/>
+
                         </div>
                     </div>
                     <div class="col-md-4 mt-4">
@@ -250,17 +255,17 @@ $container.addEventListener('keydown', function(evt) {
   if ( !evt.target.matches('.js-tag-input') ) {
     return;
   }
-  
+
   if ( evt.keyCode !== 13 ) {
     return;
   }
-  
+
   var value = String(evt.target.value);
-  
+
   if ( !value.length || value.length > 20 || tags.length === 3 ) {
     return;
   }
-  
+
   tags.push(evt.target.value);
   $input.value = '';
   render(tags, $tags);
@@ -270,15 +275,15 @@ $container.addEventListener('keydown', function(evt) {
   if ( !evt.target.matches('.js-tag-input') ) {
     return;
   }
-  
+
   if ( evt.keyCode !== 8 ) {
     return;
   }
-  
+
   if ( String(evt.target.value).length ) {
     return;
   }
-  
+
   tags = tags.slice(0, tags.length - 1);
   $input.value = '';
   render(tags, $tags);
@@ -292,7 +297,7 @@ $container.addEventListener('click', function(evt) {
     render(tags, $tags);
   }
 }, true);
- 
+
 
 function render(tags, el) {
   el.innerHTML = tags.map(function(tag, i) {
@@ -304,7 +309,7 @@ function render(tags, el) {
    );
   }).join('') + (tags.length === 3 ? '' : '<input placeholder="Enter new tag..." class="js-tag-input">')
   ;
-  
+
   $container.querySelector('.js-tag-input').focus();
     $("#textInput").css("width","100%")
 
@@ -539,6 +544,15 @@ var tagInput= '';
 // //         max : 10
 // //     });
 // }
+</script>
+<script data-name="basic">
+(function(){
+// The DOM element you wish to replace with Tagify
+var input = document.querySelector('textarea[name=basic]');
+
+// initialize Tagify on the above input node reference
+new Tagify(input)
+})()
 </script>
 
 @endpush
