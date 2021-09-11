@@ -22,7 +22,7 @@
   <link rel="preload" href="https://cdna.iconscout.com/12c5f2d3b2627c775d3f.js" as="script">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
- 
+
   </head>
 <body id="body">
 <div class="container-fluid topheader-vendor">
@@ -36,12 +36,12 @@
         <img src="{{asset('assets/images/91.jpg')}}" class="imgventop" alt="">
     </div>
 </div>
-</div>          
+</div>
 <div class="container" style="max-width: 1450px;">
             <nav class="gn-menu-wrapper gn-menu-main gn-open-part">
                 <div class="gn-scroller">
                     <ul id="myDIV" class="gn-menu ">
-                       
+
                         <li class="active"><a href="{{url('home')}}" class="gn-icon fa fa-home"></a>
                         </li>
                         <li><a href="{{url('vendor/icon')}}" class="gn-icon  fa fa-eercast"></a>
@@ -64,14 +64,14 @@
                               </form>
                             </a>
                         </li>
-                       
-                        
-                       
+
+
+
                     </ul>
                 </div>
                 <!-- /gn-scroller -->
             </nav>
-            
+
         @yield('content')
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -81,7 +81,7 @@
 
      @stack('scripts')
      <script type="text/javascript">
-      
+
 //$('.gn-icon-menu').hover(function(){
   //$('.gn-menu-wrapper').toggleClass('gn-open-part');
 //});
@@ -94,30 +94,30 @@ $('.gn-icon-menu').click(function(){
 })
 
 
-Dropzone.options.dropzoneForm = {
-    autoProcessQueue : false,
-    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
+// Dropzone.options.dropzoneForm = {
+//     autoProcessQueue : false,
+//     acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
 
-    init:function(){
-      var submitButton = document.querySelector("#submit-all");
-      myDropzone = this;
+//     init:function(){
+//       var submitButton = document.querySelector("#submit-all");
+//       myDropzone = this;
 
-      submitButton.addEventListener('click', function(){
-        myDropzone.processQueue();
-      });
+//       submitButton.addEventListener('click', function(){
+//         myDropzone.processQueue();
+//       });
 
-      this.on("complete", function(){
-        if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
-        {
-          var _this = this;
-          _this.removeAllFiles();
-        }
-        load_images();
-      });
+//       this.on("complete", function(){
+//         if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+//         {
+//           var _this = this;
+//           _this.removeAllFiles();
+//         }
+//         load_images();
+//       });
 
-    }
+//     }
 
-  };
+//   };
 
 
     </script>

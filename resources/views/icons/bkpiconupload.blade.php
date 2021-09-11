@@ -12,12 +12,12 @@
       <p class="uploadp">Below are the file types which required for each icon files</p>
       <div class="row ml-1">
         <div class="uploadrowbt">
-          <button class="btn uploadexmbt">SVG</button> 
-          <button class="btn uploadexmbt">PNG</button> 
-          <button class="btn uploadexmbt">ICO</button> 
-          <button class="btn uploadexmbt">ICNS</button> 
+          <button class="btn uploadexmbt">SVG</button>
+          <button class="btn uploadexmbt">PNG</button>
+          <button class="btn uploadexmbt">ICO</button>
+          <button class="btn uploadexmbt">ICNS</button>
           <button class="btn uploadexmbt">AI</button>
-          <button class="btn uploadexmbt">PDF</button>    
+          <button class="btn uploadexmbt">PDF</button>
         </div>
       </div>
       @if (count($errors) > 0)
@@ -60,10 +60,10 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-        Dropzone.options.imageUpload = {
-            maxFilesize         :       1,
-            acceptedFiles: ".jpeg,.jpg,.png,.gif"
-        };
+      //  Dropzone.options.imageUpload = {
+   //         maxFilesize         :       1,
+      //      acceptedFiles: ".jpeg,.jpg,.png,.gif"
+        //};
 </script>
 
 @endpush

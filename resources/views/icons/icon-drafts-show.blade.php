@@ -23,10 +23,10 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-        Dropzone.options.imageUpload = {
-            maxFilesize         :       1,
-            acceptedFiles: ".jpeg,.jpg,.png,.gif"
-        };
+      //  Dropzone.options.imageUpload = {
+   //         maxFilesize         :       1,
+      //      acceptedFiles: ".jpeg,.jpg,.png,.gif"
+        //};
 </script>
 
 @endpush
