@@ -118,7 +118,7 @@ display:none;
                                 <input class="js-tag-input" placeholder="Enter new tag..." id="textInput"/>
                             </div> -->
                             {{-- <textarea type="text" class="form-control" placeholder="description"></textarea> --}}
-                        <textarea name='basic' class="form-control"  autofocus rows="5">tag1, tag2</textarea>
+                        <textarea name='basic' class="form-control"  autofocus rows="5" id="assetTags">tag1, tag2</textarea>
 
                         </div>
                     </div>
@@ -239,6 +239,7 @@ const addDataToItem=()=>{
     if (assetDescription.value) {
         productDescription.value = assetDescription.value
     }
+console.log($('#assetTags').val());
 }
 
 // description tag code Start
