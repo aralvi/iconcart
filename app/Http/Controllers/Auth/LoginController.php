@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -39,42 +40,57 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
 
-    // public function showAdminLoginForm()
-    // {
-    //     return view('auth.login', ['url' => 'admin']);
-    // }
-    
-    // public function adminLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'email'   => 'required|email',
-    //         'password' => 'required|min:6'
-    //     ]);
-    
-    //     if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-    
-    //         return redirect()->intended('/admin');
-    //     }
-    //     return back()->withInput($request->only('email', 'remember'));
-    // }
+        $this->_registerOrLoginUser($user);
+        return redirect('home');//->route('home');
+    }
 
-    // public function showVendorLoginForm()
-    // {
-    //     return view('auth.login', ['url' => 'vendor']);
-    // }
-    
-    // public function VendorLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'email'   => 'required|email',
-    //         'password' => 'required|min:6'
-    //     ]);
-    
-    //     if (Auth::guard('vendor')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-    
-    //         return redirect()->intended('/vendor');
-    //     }
-    //     return back()->withInput($request->only('email', 'remember'));
-    // }
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        $this->_registerOrLoginUser($user);
+        return redirect('home');
+    }
+
+
+    protected function _registerOrLoginUser($data)
+    {
+        $user = User::where('email','=',$data->email)->first();
+        if(!$user){
+            $user = new User();
+            $user->name = $data->name;
+            $user->email = $data->email;
+            // $user->provider_id = $data->provider_id;
+            $user->avatar = $data->avatar;
+            $user->save();
+        }
+        Auth::login($user);
+    }
 }

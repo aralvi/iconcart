@@ -29,15 +29,15 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    'facebook' => [
-        'client_id'     => env('FB_ID'),
-        'client_secret' => env('FB_SECRET'),
-        'redirect'      => env('APP_URL') . '/callback/oauth/facebook/',
+     'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' =>'http://localhost/IT%20Planet/iconcart/login/google/callback',
     ],
-    'google' => [
-        'client_id'     => env('GL_ID'),
-        'client_secret' => env('GL_SECRET'),
-        'redirect'      => env('APP_URL') . '/login/google/callback',
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://localhost/IT%20Planet/iconcart/login/facebook/callback',
     ],
 
 ];

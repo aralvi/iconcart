@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +31,18 @@ Auth::routes(['verify' => true]);
 // Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 // Route::post('/register/vendor', 'Auth\RegisterController@createVendor');
 
+Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('/login/google/callback', 'Auth\LoginController@handleGoogleCallback');
+Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('login.facebook');
+Route::get('/login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+
+
 
 Route::get('/oauth/{driver}', 'Auth\SocialController@redirectToDriver')->name('social.oauth');
 Route::get('/callback/oauth/{driver}', 'Auth\SocialController@handleDriverCallback')->name('social.callback');
 
-Route::get('/login/google', 'Auth\SocialController@redirectToGoogle')->name('google.login');
-Route::get('/login/google/callback', 'Auth\SocialController@handelGoogleCallback')->name('google.callback');
+// Route::get('/login/google', 'Auth\SocialController@redirectToGoogle')->name('google.login');
+// Route::get('/login/google/callback', 'Auth\SocialController@handelGoogleCallback')->name('google.callback');
 
 Route::get('/home','Vendor\DashboardController@index')->middleware('verified');
 
