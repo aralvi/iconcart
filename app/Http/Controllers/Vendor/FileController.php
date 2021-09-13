@@ -114,11 +114,16 @@ class FileController extends Controller
 
     public function saveDrafts(Request $request)
     {
-        dd($request->all());
-        //     $products = Product::find($id);
-        // $products->status = 1;
-        // $products->update();
-        // return redirect(url('home'));
+       foreach ($request->id as $key => $id) {
+           $products = Product::find($id);
+       $products->status = 1;
+       $products->price = $request->price[$key];
+       $products->description = $request->description[$key];
+       $products->name = $request->title[$key];
+       $products->status = 1;
+       $products->update();
+       }
+        return redirect(url('home'));
     }
 
 
