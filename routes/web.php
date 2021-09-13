@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +60,8 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::post('/icon/draft','FileController@uploadFile')->name('icons.drafts');
     Route::post('/illustrations/upload','FileController@photoUpload')->name('illustrations.drafts');
     Route::post('/vector/upload','FileController@vectorUpload')->name('vectors.drafts');
-    Route::post('/drafts/save/{id}','FileController@saveDrafts')->name('save.drafts');
+    // Route::post('/drafts/save/{id}','FileController@saveDrafts')->name('save.drafts');
+    Route::post('/drafts/all/save','FileController@saveDrafts')->name('save.all.drafts');
     Route::post('/drafts/submit-as-pack/{id}','FileController@saveToReview')->name('submit-as-pack.drafts');
 
     Route::get('/product-delete/{id}','FileController@destroy')->name('product-delete');

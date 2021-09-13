@@ -68,10 +68,10 @@
             <div class="row float-right">
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2">
-                        <a href="{{ route('save.drafts',$products[0]['id']) }}" onclick="event.preventDefault();  document.getElementById('savedrafts-form').submit();">Save Draft</a>
-                        <form id="savedrafts-form" action="{{ route('save.drafts',$products[0]['id']) }}" method="POST" style="display: none;">
+                        <a href="{{ route('save.all.drafts') }}" onclick="event.preventDefault();  document.getElementById('all-products-form').submit();">Save Draft</a>
+                        {{-- <form id="savedrafts-form" action="{{ route('save.drafts',$products[0]['id']) }}" method="POST" style="display: none;">
                             @csrf
-                        </form>
+                        </form> --}}
                     </button>
                 </div>
                 <div class="uploadrowbt2">
@@ -140,6 +140,8 @@
         </div>
     </div>
 
+    <form action="{{ route('save.all.drafts') }}" method="post" id="all-products-form">
+        @csrf
     <div class="row">
         @foreach ($products as $key=> $product)
 
@@ -150,20 +152,20 @@
                 </div>
 
                 <div class="row" style="border-top: 1px solid #d8dbeb; border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
-                    <input type="hidden" class="draftin2" value="{{$product['id']}}" name="id" id="" />
+                    <input type="hidden" class="draftin2" value="{{$product['id']}}" name="id[]" id="" />
                     <div class="col-lg-9 col-md-9 col-sm-9 col-9 px-0 border-right">
-                        <input type="text" class="draftin1" value="{{$product['name']}}" name="" id="productTitle" />
+                        <input type="text" class="draftin1 productTitle" value="{{$product['name']}}" name="title[]" id="productTitle" />
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-3 pr-0">
                         <div class="d-flex justify-content-between align-items-center">
                             <span>$</span>
-                            <input type="text" class="draftin2 border-0 pl-1" value="10" name="" id="productPrice" />
+                            <input type="text" class="draftin2 border-0 pl-1 productPrice" value="10" name="price[]" id="productPrice" />
                         </div>
                     </div>
                 </div>
                 <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
                     <div class="col-lg-12 col-md-12 col-sm-2 col-2">
-                        <input type="text" class="draftin3" placeholder="Description" name="" id="productDescription" />
+                        <input type="text" class="draftin3 productDescription" placeholder="Description" name="description[]" id="productDescription" />
                     </div>
                 </div>
                 <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
@@ -174,7 +176,7 @@
                         <span class="badge badge-info">{{$tags}}</span>
                         @endforeach
 
-                        <textarea name="tagInput" class="input1 p-3" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
+                        <textarea name="tagInput" class="input1 p-3" name="tags[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                         <div class="draftsp11">Suggested tags</div>
@@ -210,6 +212,7 @@
 
         @endforeach
     </div>
+</form>
 </div>
 <!-- /container -->
 
@@ -225,15 +228,16 @@
 
     const addDataToItem = () => {
         if (assets.value) {
-            productTitle.value = assets.value;
+            $('.productTitle').val(assets.value);
         }
         if (assetPrice.value) {
-            productPrice.value = assetPrice.value;
+            $('.productPrice').val(assetPrice.value);
         }
         if (assetDescription.value) {
-            productDescription.value = assetDescription.value;
+            $('.productDescription').val(assetDescription.value);
         }
-        console.log($("#assetTags").val());
+        console.log( JSON.parse($("#assetTags").val())[0].value);
+      
     };
 
     // description tag code Start

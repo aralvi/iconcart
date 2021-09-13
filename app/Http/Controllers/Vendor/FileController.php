@@ -112,12 +112,13 @@ class FileController extends Controller
         }
     }
 
-    public function saveDrafts($id,Request $request)
+    public function saveDrafts(Request $request)
     {
-            $products = Product::find($id);
-        $products->status = 1;
-        $products->update();
-        return redirect(url('home'));
+        dd($request->all());
+        //     $products = Product::find($id);
+        // $products->status = 1;
+        // $products->update();
+        // return redirect(url('home'));
     }
 
 
