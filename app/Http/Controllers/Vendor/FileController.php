@@ -115,12 +115,15 @@ class FileController extends Controller
 
     public function saveDrafts(Request $request)
     {
-       foreach ($request->id as $key => $id) {
+        foreach ($request->id as $key => $id) {
+            $tags = 'taginput'.$key;
+
            $products = Product::find($id);
        $products->status = 1;
        $products->price = $request->price[$key];
        $products->description = $request->description[$key];
        $products->name = $request->title[$key];
+       $products->tags = $request->$tags;
        $products->status = 1;
        $products->update();
        }
