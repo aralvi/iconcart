@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container-fluid indmain2">
-  <span class="uploadp">< My Vectors</span>
-<h1 class="indmainh1 mt-2">Upload Vectors</h1>
+  <span class="uploadp">< My illustration</span>
+<h1 class="indmainh1 mt-2">Upload illustration</h1>
 <div class="uploadupperdiv mt-4">
   <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12 uploadleftdiv">
       <h5 class="cashousp1 text-black font-weight-bold">File type required</h5>
-      <p class="uploadp">Below are the file types which required for each vectors files</p>
+      <p class="uploadp">Below are the file types which required for each illustration files</p>
       <div class="row ml-1">
         <div class="uploadrowbt">
           <button class="btn uploadexmbt">SVG</button>    
@@ -36,7 +36,7 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12 uploadrightdiv">
       <div class="uplrin text-center">
-      <form action="{{ route('vectors.drafts') }}" method="POST" enctype="multipart/form-data" id="image-upload" >
+      <form action="{{ route('illustration.drafts') }}" method="POST" enctype="multipart/form-data" id="image-upload" >
             @csrf
             <!-- <div>
             <h2>➕</h2><br>

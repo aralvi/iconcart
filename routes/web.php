@@ -57,16 +57,16 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::get('/photo/upload',function(){ return view('illustrations.illustrationsuplaod');});
     Route::get('/photo-draft-show','FileController@photosDraftShow');
     Route::get('/photo-draft-edit/{id}','FileController@photoEdit')->name('photo.edit');
-    Route::get('/vector','DashboardController@vectorCounter');
+    Route::get('/illustration','DashboardController@vectorCounter');
     Route::get('/vector-draft-show','FileController@vectorDraftShow');
-    Route::get('/vector/upload',function(){ return view('vectors.vectorupload');});
+    Route::get('/illustration/upload',function(){ return view('vectors.vectorupload');});
     Route::get('/vector-draft-edit/{id}','FileController@vectorEdit')->name('vector.edit');
     Route::get('/animation',function(){ return view('animations.animation');});
     Route::get('/animation/upload',function(){ return view('animations.animationupload');});
 
     Route::post('/icon/draft','FileController@uploadFile')->name('icons.drafts');
     Route::post('/illustrations/upload','FileController@photoUpload')->name('illustrations.drafts');
-    Route::post('/vector/upload','FileController@vectorUpload')->name('vectors.drafts');
+    Route::post('/illustration/upload','FileController@vectorUpload')->name('illustration.drafts');
     // Route::post('/drafts/save/{id}','FileController@saveDrafts')->name('save.drafts');
     Route::post('/drafts/all/save','FileController@saveDrafts')->name('save.all.drafts');
     Route::post('/drafts/submit-as-pack/{id}','FileController@saveToReview')->name('submit-as-pack.drafts');

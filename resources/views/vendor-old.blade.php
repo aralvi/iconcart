@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 ">
             <h1 class="indmainh1">Hello!</h1>
-            <h1 class="indmainh1">Vector Stall</h1>
+            <h1 class="indmainh1">Illustration Stall</h1>
             <p class="indmainp1">Here is the stats of all Products</p>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 ">
@@ -23,7 +23,7 @@
                     <div class="indboxs">
                         <a style="text-decoration: none;" href="{{url('vendor/vector')}}">
                         <img src="assets/images/Capture.PNG" alt="">
-                        <h3 class="indboxh3">Vectors</h3>
+                        <h3 class="indboxh3">Illustration</h3>
                         <p class="indboxp1">{{ $vectors->count() }} vectors</p>
                     </a>
                     </div>

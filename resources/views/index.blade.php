@@ -30,7 +30,7 @@
                   Search and download
   
                   <ul class="list-unstyled animation_FeuoF">
-                    <li class="text-left">Vector Icons</li>
+                    <li class="text-left">illustration Icons</li>
                     <li class="text-left">Illustrations</li>
                     <li class="text-left">3D Assets</li>
                   </ul>
@@ -87,7 +87,7 @@
                 <div class="image_3vyQU" style="background-image: url('assets/images/517877b.png')">
                 </div>
                 <div class="pt-5 pb-7">
-                  <h4 class="ml-6 mb-3">Vector Icons</h4>
+                  <h4 class="ml-6 mb-3">illustration Icons</h4>
                   <div class="ml-6 d-flex justify-content-center align-items-center arrow_2t84y"><i
                       class="uis uii-right-arrow h4 m-0"></i></div>
                 </div>

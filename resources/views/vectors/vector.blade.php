@@ -6,13 +6,13 @@
 <div class="container indmain1">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h1 class="indmainh1 ml-5">My Vectors</h1>
+            <h1 class="indmainh1 ml-5">My Illustrations</h1>
         </div>
     </div>
     <div class="row">
         <div class=" offset-lg-2 col-lg-3  col-md-6 col-sm-12 col-12">
              <div class="indboxs pt-3 pr-3 pl-3">
-                 <a style="text-decoration: none !important;" href="{{url('vendor/vector/upload')}}">
+                 <a style="text-decoration: none !important;" href="{{url('vendor/illustration/upload')}}">
                      <div class="pb-4 pt-4" style="border:1px dashed black;border-radius: 12px;" >
                      <img src="{{asset('assets/images/c2.PNG')}}" alt="">
                  <h3 class="indboxh3">Upload New</h3>

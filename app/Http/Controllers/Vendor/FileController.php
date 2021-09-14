@@ -86,9 +86,9 @@ class FileController extends Controller
 
     public function vectorUpload(Request $request)
     {
-        $category          = Category::where('name','vector')->first();
+        $category  = Category::where('name','vector')->first();
         $request->validate([
-            'vector' => 'required|image|mimes:png,svg,eps,ai',
+            'vector' => 'required|mimes:zip',
           ]);
           if ($request->file('vector')) {
             $imagePath    = $request->file('vector');
@@ -107,6 +107,7 @@ class FileController extends Controller
             'tags'          =>  $imageName,
         ]);
         $tagsSuggteds      = explode(",",$imageName);
+        dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
