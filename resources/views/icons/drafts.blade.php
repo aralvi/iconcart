@@ -176,17 +176,17 @@
                         <span class="badge badge-info">{{$tags}}</span>
                         @endforeach
 
-                        <textarea name="tagInput" class="input1 p-3" name="tags[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
+                        <textarea  class="input1 p-3" data-taginput="taginput{{$key}}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                         <div class="draftsp11">Suggested tags</div>
                         <div class="suggestedTags">
-                            <span class="cp badge badge-info appendTag" onclick="suggestionTagAppend(this)">one</span>
-                            <span class="cp badge badge-info appendTag" onclick="suggestionTagAppend(this)">two</span>
-                            <span class="cp badge badge-info appendTag" onclick="suggestionTagAppend(this)">three</span>
-                            <span class="cp badge badge-info appendTag" onclick="suggestionTagAppend(this)">four</span>
-                            <span class="cp badge badge-info appendTag" onclick="suggestionTagAppend(this)">five</span>
-                            <span class="cp badge badge-info appendTag" onclick="suggestionTagAppend(this)">six</span>
+                            <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">one</span>
+                            <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">two</span>
+                            <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">three</span>
+                            <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">four</span>
+                            <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">five</span>
+                            <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">six</span>
                         </div>
                         <!-- @foreach($tagsSuggteds[$key] as $tags)
                       <span class="badge badge-info">{{$tags}}</span>
@@ -245,7 +245,7 @@ function submitForm(e){
             $('.productDescription').val(assetDescription.value);
         }
         console.log( JSON.parse($("#assetTags").val())[0].value);
-      
+
     };
 
     // description tag code Start
@@ -326,11 +326,13 @@ function submitForm(e){
     // code of suggestion tags section start
     const addDivs = (e) => {
         // creating new div
+        console.log(e);
         let creatingDiv = document.createElement("div");
         creatingDiv.classList.add("tags-input-wrapper");
         // Creating input into new div
         let newInput = document.createElement("input");
         newInput.setAttribute("type", "text");
+        newInput.setAttribute("data-taginput", $(e).data('taginput'));
         newInput.setAttribute("onkeydown", "addTags(this)");
 
         // append Tags
@@ -343,7 +345,7 @@ function submitForm(e){
 
     const addTags = (e) => {
         let keycode = event.keyCode ? event.keyCode : event.which;
-        
+
         if (keycode == "13" && e.value !== "") {
             console.log("duabra hoa");
             // creating span
@@ -362,7 +364,7 @@ function submitForm(e){
 
               // creating  input tag
             let creatingInputTag = document.createElement("input");
-            creatingInputTag.setAttribute("name", "tagInput");
+            creatingInputTag.setAttribute("name", $(e).data('taginput'));
             creatingInputTag.setAttribute("value", e.value);
             creatingInputTag.setAttribute("hidden",'');
             // append input tag into span
@@ -389,7 +391,7 @@ function submitForm(e){
 
              // creating  input tag
              let creatingInputTag = document.createElement("input");
-            creatingInputTag.setAttribute("name","tagInput");
+            creatingInputTag.setAttribute("name",$(e).data('taginput'));
             creatingInputTag.setAttribute("value",$(e).html());
             creatingInputTag.setAttribute("hidden",'');
             // append input tag into span
