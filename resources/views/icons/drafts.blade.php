@@ -245,13 +245,21 @@ function submitForm(e){
             $('.productDescription').val(assetDescription.value);
         }
         // console.log( JSON.parse($("#assetTags").val())[0].value);
-
+let i = 0
                 for(let item of document.querySelectorAll('tag')){
-
+i++;
                     // creating span
                     let creatingSpanAdvance = document.createElement("span");
                     creatingSpanAdvance.classList.add("tag");
                     creatingSpanAdvance.append(item.getAttribute('value'));
+
+                     // creating  input tag
+                    let creatingInputTag = document.createElement("input");
+                    creatingInputTag.setAttribute("name",'taginput'+i);
+                    creatingInputTag.setAttribute("value",item.getAttribute('value'));
+                    creatingInputTag.setAttribute("hidden",'');
+
+                    creatingSpanAdvance.append(creatingInputTag)
 
                     // creating  anchor tag
                     let creatingAncherTagAdvance = document.createElement("a");
