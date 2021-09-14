@@ -244,7 +244,27 @@ function submitForm(e){
         if (assetDescription.value) {
             $('.productDescription').val(assetDescription.value);
         }
-        console.log( JSON.parse($("#assetTags").val())[0].value);
+        // console.log( JSON.parse($("#assetTags").val())[0].value);
+
+                for(let item of document.querySelectorAll('tag')){
+
+                    // creating span
+                    let creatingSpanAdvance = document.createElement("span");
+                    creatingSpanAdvance.classList.add("tag");
+                    creatingSpanAdvance.append(item.getAttribute('value'));
+
+                    // creating  anchor tag
+                    let creatingAncherTagAdvance = document.createElement("a");
+                    creatingAncherTagAdvance.append("x");
+                    creatingAncherTagAdvance.setAttribute("onclick", "removeTag(this)");
+
+                    // append ancher tag into span
+                    creatingSpanAdvance.append(creatingAncherTagAdvance);
+                   
+                    $('.tags-input-wrapper').prepend(creatingSpanAdvance)
+                }
+      
+
       
     };
 
@@ -345,7 +365,8 @@ function submitForm(e){
         let keycode = event.keyCode ? event.keyCode : event.which;
         
         if (keycode == "13" && e.value !== "") {
-            console.log("duabra hoa");
+            // console.log("duabra hoa");
+
             // creating span
             let creatingSpan = document.createElement("span");
             creatingSpan.classList.add("tag");
