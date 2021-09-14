@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    <form action="{{ route('save.all.drafts') }}" method="post" id="all-products-form">
+    <form action="{{ route('save.all.drafts') }}" method="post" id="all-products-form" onkeypress="return event.keyCode != 13;">
         @csrf
     <div class="row">
         @foreach ($products as $key=> $product)
@@ -335,6 +335,7 @@
 
     const addTags = (e) => {
         let keycode = event.keyCode ? event.keyCode : event.which;
+        
         if (keycode == "13" && e.value !== "") {
             console.log("duabra hoa");
             // creating span
@@ -349,6 +350,15 @@
 
             // append ancher tag into span
             creatingSpan.append(creatingAncherTag);
+
+
+              // creating  input tag
+            let creatingInputTag = document.createElement("input");
+            creatingInputTag.setAttribute("name", e.value);
+            creatingInputTag.setAttribute("value", e.value);
+            creatingInputTag.setAttribute("hidden",'');
+            // append input tag into span
+            creatingSpan.append(creatingInputTag);
 
             // append Tag into textbox
             e.value = "";
@@ -368,11 +378,25 @@
             $(e).addClass("tag");
             $(e).removeAttr("onclick");
 
+
+             // creating  input tag
+             let creatingInputTag = document.createElement("input");
+            creatingInputTag.setAttribute("name",$(e).html());
+            creatingInputTag.setAttribute("value",$(e).html());
+            creatingInputTag.setAttribute("hidden",'');
+            // append input tag into span
+
+            e.append(creatingInputTag);
+
+
             // creating Anchor tag in suggestion section
             let creatingAncherTag = document.createElement("a");
             creatingAncherTag.append("x");
             creatingAncherTag.setAttribute("onclick", "removeTag(this)");
             e.append(creatingAncherTag);
+
+
+
 
             // Main tag in which all tags is to be append
             let mainWrapper = e.parentNode.parentNode.previousElementSibling.children[4];
