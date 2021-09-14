@@ -509,7 +509,7 @@
                     </ul>
                  </div>
               </li>
- 
+                     
               <li class="mr-5">
                  <div class="dropdown b-dropdown btn-group">
                     <button aria-haspopup="true" aria-expanded="false" type="button"
@@ -518,7 +518,8 @@
                        aria-expanded="false"> <img src="https://cdna.iconscout.com/img/052b16a.svg" alt="iconscout-logo"
                        height="30"></button>
                     <ul role="menu" tabindex="-1" class="dropdown-menu dropdown-menu-left">
-                     <li role="presentation" class="px-2"><button role="menuitem" data-toggle="modal"
+                       @guest
+                            <li role="presentation" class="px-2"><button role="menuitem" data-toggle="modal"
                           data-target="#exampleModalSignup" type="button" class="dropdown-item">
                           Sign Up
                           </button>
@@ -528,6 +529,20 @@
                           Log In
                           </button>
                        </li>
+                       @else
+                       <li role="presentation" class="px-2"><button role="menuitem" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit()" type="button" class="dropdown-item">
+                          Log Out
+                          </button>
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                          </form>
+                       </li>
+                            
+                                 
+
+                        @endguest
+                     
                     </ul>
                  </div>
               </li>
