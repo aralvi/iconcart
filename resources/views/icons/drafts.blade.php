@@ -362,7 +362,7 @@ function submitForm(e){
 
               // creating  input tag
             let creatingInputTag = document.createElement("input");
-            creatingInputTag.setAttribute("name", e.value);
+            creatingInputTag.setAttribute("name", "tagInput");
             creatingInputTag.setAttribute("value", e.value);
             creatingInputTag.setAttribute("hidden",'');
             // append input tag into span
@@ -389,7 +389,7 @@ function submitForm(e){
 
              // creating  input tag
              let creatingInputTag = document.createElement("input");
-            creatingInputTag.setAttribute("name",$(e).html());
+            creatingInputTag.setAttribute("name","tagInput");
             creatingInputTag.setAttribute("value",$(e).html());
             creatingInputTag.setAttribute("hidden",'');
             // append input tag into span
