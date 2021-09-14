@@ -67,7 +67,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="row float-right">
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2">
+                    <button class="btn uploadexmbt2" onclick="submitForm(this)">
                         <a href="{{ route('save.all.drafts') }}" onclick="event.preventDefault();  document.getElementById('all-products-form').submit();">Save Draft</a>
                         {{-- <form id="savedrafts-form" action="{{ route('save.drafts',$products[0]['id']) }}" method="POST" style="display: none;">
                             @csrf
@@ -75,16 +75,16 @@
                     </button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2"><a href="{{route('product-delete',$products[0]['id'])}}"></a> Delete Draft</button>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this)"><a href="{{route('product-delete',$products[0]['id'])}}"></a> Delete Draft</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2">Upload More</button>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this)">Upload More</button>
                 </div>
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2" id="advandedOption">Advanced Options</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2">Submit as Individual</button>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this)">Submit as Individual</button>
                 </div>
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2">
@@ -225,6 +225,14 @@
             $("#advancedDiv").toggle();
         });
     });
+
+// Function for submiting form
+function submitForm(e){
+    $('#all-products-form').removeAttr("onkeypress")
+    $(e).attr('form','all-products-form')
+}
+
+
 
     const addDataToItem = () => {
         if (assets.value) {
