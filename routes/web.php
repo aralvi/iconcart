@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/clear-all', function () {
+    Artisan::call('optimize:clear');
+
+
+    $homeURL = url('/');
+
+    return 'Views Cleared, Routes Cleared, Cache Cleared, and Config Cleared Successfully ! <a href="' . $homeURL . '">Go Back To Home</a>';
+});
 Route::get('/', function () {
     return view('index');
 });
