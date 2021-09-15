@@ -948,16 +948,20 @@
             e.preventDefault();
            var form = $(this);
             var url = form.attr('action');
-            
+            $('.loader-bar').addClass('d-flex').removeClass('d-none')
             $.ajax({
                   type: "POST",
                   url: url,
                   data: form.serialize(), // serializes the form's elements.
                   success: function(data)
                   {
-                      location.replace(data);// show response from the php script.
+                     setTimeout(function() {
+                        location.replace(data);// show response from the php script.
+                     }, 500);
+                     $('.loader-bar').addClass('d-none').removeClass('d-flex')
                   }, error: function (data) {
-                        console.log(data);
+                        console.log(data.responseJSON.errors.email);
+                        $('.loader-bar').addClass('d-none').removeClass('d-flex')
                      }
 
                   });
