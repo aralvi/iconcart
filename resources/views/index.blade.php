@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Modal Signup-->
-@include('auth.register')
-<!-- Modal Login -->
-@include('auth.login')
+
 
     <div data-server-rendered="true" id="__nuxt">
     <!---->
@@ -2727,4 +2724,3 @@
   @include('auth.register')
 
 @endsection
- 

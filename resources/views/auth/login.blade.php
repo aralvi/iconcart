@@ -47,7 +47,7 @@
               </div>
             </div>
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" id="login-form">
             {{ csrf_field() }}
               <fieldset class="form-group" id="__BVID__645">
 
@@ -98,6 +98,8 @@
          $(document).ready(function(){
             $("#exampleModalLogin").modal("show");
          });
+
+         
     </script>
 @endif
 @endsection

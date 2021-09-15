@@ -926,23 +926,42 @@
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/js/slick/slick.min.js">
 <script>
-    $.noConflict()
+//     $.noConflict()
 
-    jQuery(document).ready(function(){
-      console.log('sfsdf');
-      jQuery('.multiple-items').slick({
-        dots:true,
-      arrows:true,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-  autoplaySpeed: 1000,
-    });
-    })
+//     jQuery(document).ready(function(){
+//       jQuery('.multiple-items').slick({
+//         dots:true,
+//       arrows:true,
+//       infinite: true,
+//       slidesToShow: 1,
+//       slidesToScroll: 1,
+//       autoplay: true,
+//   autoplaySpeed: 1000,
+//     });
+//     })
+    $('#login-form').on('submit',function(e){
+            e.preventDefault();
+           var form = $(this);
+            var url = form.attr('action');
+            
+            $.ajax({
+                  type: "POST",
+                  url: url,
+                  data: form.serialize(), // serializes the form's elements.
+                  success: function(data)
+                  {
+                      location.replace(data);// show response from the php script.
+                  }, error: function (data) {
+                        console.log(data);
+                     }
+
+                  });
+         }) 
   </script>
 
   @stach('scripts')
