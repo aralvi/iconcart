@@ -944,10 +944,13 @@
 //   autoplaySpeed: 1000,
 //     });
 //     })
-    $('#login-form').on('submit',function(e){
+function forSubmit(formID,formType) {
+   
+    $(formID).on('submit',function(e){
             e.preventDefault();
            var form = $(this);
             var url = form.attr('action');
+            $('.invalid-feedback').css({'display':'none'})
             $('.loader-bar').addClass('d-flex').removeClass('d-none')
             $.ajax({
                   type: "POST",
@@ -960,12 +963,18 @@
                      }, 500);
                      $('.loader-bar').addClass('d-none').removeClass('d-flex')
                   }, error: function (data) {
-                        console.log(data.responseJSON.errors.email);
+                      console.log(data.responseJSON.errors);
+                        $.each(data.responseJSON.errors, function(i, er) {
+                           $('#'+formType+'-'+i+'-message').parent().css({'display':'block'})
+                           $('#'+formType+'-'+i+'-message').text(er[0])
+                        });
                         $('.loader-bar').addClass('d-none').removeClass('d-flex')
                      }
 
                   });
          }) 
+}
+   
   </script>
 
   @stach('scripts')

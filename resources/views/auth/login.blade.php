@@ -91,18 +91,18 @@
 
               <div class="lds-facebook"><div></div><div></div><div></div></div>
             </div>
-            <form method="POST" action="{{ route('login') }}" id="login-form">
+            <form method="POST" action="{{ route('login') }}" id="login-form" >
             {{ csrf_field() }}
               <fieldset class="form-group" id="__BVID__645">
 
                 <div tabindex="-1" role="group" class="bv-no-focus-ring" bis_skin_checked="1">
                   <input name="email" id="email"
                     type="email" placeholder="Email Address" class="form-control  @error('email') is-invalid @enderror">
-                    @error('email')
+                    {{-- @error('email') --}}
                     <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong id="login-email-message"></strong>
                         </span>
-                    @enderror
+                    {{-- @enderror --}}
                 </div>
               </fieldset>
               <fieldset class="form-group" id="__BVID__647">
@@ -110,13 +110,13 @@
                 <div tabindex="-1" role="group" class="bv-no-focus-ring" bis_skin_checked="1">
                   <input name="password"
                     type="password" placeholder="Password" class="form-control  @error('password') is-invalid @enderror">
-                    @error('password')
+                    {{-- @error('password') --}}
                             <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong id="login-password-message"></strong>
                                 </span>
-                            @enderror
+                            {{-- @enderror --}}
                 </div>
-              </fieldset> <button type="submit" class="btn btn-primary btn-block">
+              </fieldset> <button type="submit" class="btn btn-primary btn-block" onclick="forSubmit('#login-form','login')">
                 Log In
               </button>
             </form>

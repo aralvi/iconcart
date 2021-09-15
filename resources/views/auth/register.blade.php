@@ -48,7 +48,7 @@
                     </div>
                  </div>
              
-                 <form method="POST" action="{{ route('register') }}">
+                 <form method="POST" action="{{ route('register') }}" id="register-form">
                    {{ csrf_field() }}
 
                     <fieldset class="form-group" id="__BVID__630">
@@ -56,36 +56,36 @@
                        <div tabindex="-1" role="group" class="bv-no-focus-ring" bis_skin_checked="1">
                           <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"
                              type="text" placeholder="Name" >
-                             @error('name')
+                             {{-- @error('name') --}}
                               <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
+                                       <strong id="register-name-message"></strong>
                                     </span>
-                              @enderror
+                              {{-- @enderror --}}
                        </div>
                        <div tabindex="-1" role="group" class="bv-no-focus-ring" bis_skin_checked="1">
                           <input name="email"
                              type="text" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror">
-                             @error('email')
+                             {{-- @error('email') --}}
                               <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
+                                       <strong id="register-email-message"></strong>
                                     </span>
-                              @enderror
+                              {{-- @enderror --}}
                        </div>
                        <!---->
                        <div tabindex="-1" role="group" class="bv-no-focus-ring" bis_skin_checked="1">
                           <input name="password"
                              type="password" placeholder="Password"class="form-control @error('password') is-invalid @enderror">
-                             @error('password')
+                             {{-- @error('password') --}}
                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong id="register-password-message"></strong>
                                  </span>
-                           @enderror
+                           {{-- @enderror --}}
                        </div>
                        <div tabindex="-1" role="group" class="bv-no-focus-ring" bis_skin_checked="1">
                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" id="__BVID__633">
                        </div>
                     </fieldset>
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" class="btn btn-primary btn-block"  onclick="forSubmit('#register-form','register')">
                     Sign Up
                     </button>
                  </form>
