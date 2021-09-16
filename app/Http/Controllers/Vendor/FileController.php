@@ -107,7 +107,7 @@ class FileController extends Controller
             'tags'          =>  $imageName,
         ]);
         $tagsSuggteds      = explode(",",$imageName);
-        dd($products);
+        // dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
