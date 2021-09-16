@@ -966,7 +966,7 @@ function forSubmit(formID,formType) {
                       console.log(data.responseJSON.errors);
                         $.each(data.responseJSON.errors, function(i, er) {
                            $('#'+formType+'-'+i+'-message').parent().css({'display':'block'})
-                           $('#'+formType+'-'+i+'-message').text(er[0])
+                           $('#'+formType+'-'+i+'-message').text(er[0]).css({'color':'red'})
                         });
                         $('.loader-bar').addClass('d-none').removeClass('d-flex')
                      }
