@@ -232,7 +232,7 @@
 </label> -->
         <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload" >
             @csrf
-
+            <input type="hidden" name="p_id" value="{{rand()}}">
               <div class="upload">
   <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here">
   <div class="text text-drop">

@@ -16,6 +16,8 @@ class CreateSuggestedsTable extends Migration
         Schema::create('suggesteds', function (Blueprint $table) {
             $table->id();
             $table->string('tags');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

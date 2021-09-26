@@ -254,17 +254,13 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="row float-right">
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2" onclick="submitForm(this)">
-                        <a href="{{ route('save.all.drafts') }}" onclick="event.preventDefault();  document.getElementById('all-products-form').submit();">Save Draft</a>
-                        {{--
-                        <form id="savedrafts-form" action="{{ route('save.drafts',$products[0]['id']) }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                        --}}
+                    <button class="btn uploadexmbt2" onclick="submitForm(this,'{{ route('save.all.drafts') }}')">
+                        Save Draft
+
                     </button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2" onclick="submitForm(this)"><a href="{{route('product-delete',$products[0]['id'])}}"></a> Delete Draft</button>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this,'{{route('icon.delete.all',$products[0]['id'])}}?delete=all')"> Delete Draft</button>
                 </div>
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2" data-toggle="modal" data-target="#exampleModal">Upload More</button>
@@ -273,14 +269,14 @@
                     <button class="btn uploadexmbt2" id="advandedOption">Advanced Options</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2" onclick="submitForm(this)">Submit as Individual</button>
+                    <button class="btn uploadexmbt2"  onclick="submitForm(this,'{{ route('submit-as-pack.drafts',$products[0]['id']) }}?pack=individual')">
+                          Submit as Individual
+                        </button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2">
-                        <a href="{{ route('submit-as-pack.drafts',$products[0]['id']) }}" onclick="event.preventDefault();  document.getElementById('review-form').submit();">Submit as pack</a>
-                        <form id="review-form" action="{{ route('submit-as-pack.drafts',$products[0]['id']) }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this,'{{ route('submit-as-pack.drafts',$products[0]['id']) }}?pack=pack')">
+                        Submit as pack
+
                     </button>
                 </div>
             </div>
@@ -304,13 +300,10 @@
                             <input type="number" class="form-control" id="assetPrice" />
                         </div>
                     </div>
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-4 ">
                         <div class="form-group">
-                            <!-- <div class="tag-field js-tags">
-                                <input class="js-tag-input" placeholder="Enter new tag..." id="textInput"/>
-                            </div> -->
-                            {{-- <textarea type="text" class="form-control" placeholder="description"></textarea> --}}
-                            <textarea name="basic" class="form-control" autofocus rows="5" id="assetTags">tag1, tag2</textarea>
+                            <label for="">Tags</label>
+                            <textarea name="basic" class="form-control" autofocus rows="5" id="assetTags"></textarea>
                         </div>
                     </div>
                 </div>
@@ -334,7 +327,7 @@
         <div class="row">
             @foreach ($products as $key=> $product)
 
-            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                 <div class="draftouterdiv mt-4">
                     <div class="text-center">
                         <img src="{{url('public/images/icons/'.$product['name'])}}" class="draftimg1" alt="" />
@@ -361,25 +354,23 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 150px; overflow-y: scroll;">
                             <span class="draftsp12">1/50 Tags (4 required)</span><br />
 
-                            @foreach($tagsSuggteds[$key] as $tags)
-                            <span class="badge badge-info">{{$tags}}</span>
-                            @endforeach
-
                             <textarea class="input1 p-3" data-taginput="taginput{{$key}}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                             <div class="draftsp11">Suggested tags</div>
                             <div class="suggestedTags">
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">one</span>
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">two</span>
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">three</span>
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">four</span>
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">five</span>
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">six</span>
+                                @foreach($tagsSuggteds as $tags)
+                                @if ($tags->product_id == $product->id)
+                                @foreach (explode(',',$tags->tags) as $tag)
+
+                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">{{$tag}}</span>
+                                @endforeach
+
+                                @endif
+                                @endforeach
+
                             </div>
-                            <!-- @foreach($tagsSuggteds[$key] as $tags)
-                      <span class="badge badge-info">{{$tags}}</span>
-                      @endforeach -->
+
                         </div>
                     </div>
                 </div>
@@ -413,7 +404,7 @@
                     <div class="uplrin text-center">
                         <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
                             @csrf
-
+<input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
                             <div class="upload">
                                 <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here" />
                                 <div class="text text-drop">
@@ -474,7 +465,8 @@
     });
 
     // Function for submiting form
-    function submitForm(e) {
+    function submitForm(e,route) {
+        $("#all-products-form").attr('action',route);
         $("#all-products-form").removeAttr("onkeypress");
         $(e).attr("form", "all-products-form");
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Suggested;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FileController extends Controller
@@ -16,35 +17,46 @@ class FileController extends Controller
     */
     public function uploadFile(Request $request)
     {
+        // dd(Auth::user()->id);
         // dd($request->file('icons_upload'));
         $category = Category::where('name','icon')->first();
         $request->validate([
             'icons_upload' => 'required|array',
             'icons_upload.*' => 'required|image|mimes:png,svg,ico,eps,ai,pdf',
           ]);
-          $products=[];
-        $tagsSuggteds=[];
+        //   $products=[];
+        // $tagsSuggteds=[];
           foreach ($request->file('icons_upload') as $key => $icon) {
-            //   dd($icon);
               $imagePath    = $icon;
               $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
               $extension    = $icon->getClientOriginalExtension();
               $fileNames    = explode(",",$imageName);
               $fileEx       = $fileNames[0].'.'.$extension;
               $path         = $icon->move(public_path('images/icons'),$fileEx);
-              $suggetedTags = Suggested::create(['tags'=>$imageName]);
-              $product           =   Product::create([
-                  'name'          =>  $fileEx,
-                  'image'         =>  $fileNames[0],
-                  'category_id'   =>  $category->id,
-                  'tags'          =>  $imageName,
-              ]);
-              array_push($products,$product);
+
+              $product     =   new Product();
+              $product->user_id       =  Auth::user()->id;
+              $product->p_id       =  $request->p_id;
+                  $product->name          =  $fileEx;
+                  $product->image        =  $fileNames[0];
+                  $product->category_id   =  $category->id;
+                  $product->tags          =  $imageName;
+                  $product->save();
+                $suggetedTags = new Suggested();
+                $suggetedTags->product_id=$product->id;
+                $suggetedTags->tags= $imageName;
+                $suggetedTags->save();
+
+            //   array_push($products,$product);
               $tagsSuggted      = explode(",",$imageName);
-              array_push($tagsSuggteds,$tagsSuggted);
+            //   array_push($tagsSuggteds,$tagsSuggted);
           }
-          if ($request->file('icons_upload')) {
-          }
+          $products = Product::where('status','0')->where('p_id',$request->p_id)->get();
+          $productsArray = Product::where('status','0')->where('p_id',$request->p_id)->pluck('id')->toArray();
+
+          $tagsSuggteds = Suggested::whereIn('product_id',$productsArray)->get();
+        //   dd($tagsSuggteds);
+
 
     //    dd($products);
         if(isset($products)) {
@@ -131,11 +143,18 @@ class FileController extends Controller
     }
 
 
-    public function saveToReview($id)
+    public function saveToReview(Request $request,$id)
     {
-        $products = Product::find($id);
-        $products->status = 3;
-        $products->update();
+
+        foreach($request->id as $productID){
+            $products = Product::findOrFail($productID);
+            $products->status = 3;
+            if ($_GET['pack'] != 'pack') {
+                $products->p_id = '';
+            }
+
+            $products->update();
+        }
         return redirect(url('home'));
     }
 
@@ -171,13 +190,14 @@ class FileController extends Controller
     public function iconeEdit($id)
     {
         $products=[];
-        $tagsSuggteds=[];
+        // $tagsSuggteds=[];
         $product      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
             $q->where('name','=','icon');
         })->first();
         array_push($products,$product);
         $tagsSuggted  = explode(",",$product->tags);
-        array_push($tagsSuggteds,$tagsSuggted);
+        // array_push($tagsSuggteds,$tagsSuggted);
+        $tagsSuggteds = Suggested::where('product_id',$product->id)->get();
 
         return view('icons.drafts',compact('products','tagsSuggteds'));
 
@@ -227,10 +247,18 @@ class FileController extends Controller
 
     }
 
-    public function iconDestroy($id)
+    public function iconDestroy(Request$request,$id)
     {
-        Product::findOrFail($id)->delete();
-        return back();
+        if(isset($_GET['delete']) ){
+            foreach ($request->id as $product) {
+                Product::findOrFail($product)->delete();
+            }
+            return redirect('/home');
+        }else{
+
+            Product::findOrFail($id)->delete();
+            return back();
+        }
     }
 
 }

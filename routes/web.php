@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/clear-all', function () {
-    Artisan::call('optimize:clear');
+
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
 
 
     $homeURL = url('/');
@@ -62,6 +66,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::get('/icon-drafts-show','FileController@iconsDraftShow');
     Route::get('/icon-drafts-edit/{id}','FileController@iconeEdit')->name('icon.edit');
     Route::get('/icon-drafts-delete/{id}','FileController@iconDestroy')->name('icon.delete');
+    Route::post('/icon-drafts-delete-all/{id}','FileController@iconDestroy')->name('icon.delete.all');
     Route::get('/photo','DashboardController@photoCounter');
     Route::get('/photo/upload',function(){ return view('illustrations.illustrationsuplaod');});
     Route::get('/photo-draft-show','FileController@photosDraftShow');
