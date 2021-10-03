@@ -1,4 +1,5 @@
 @extends('layouts.vendor')
+@section('title','Dashboard')
 
 @section('content')
 <div class="container indmain1">
@@ -46,14 +47,13 @@
                 <h1 class="indbox2h1">$248</h1>
                 <p class="indboxp3">Combine Sales and Referalls</p>
                 <a href="cashout.html" class="btn indbox2bt1">Request cashout</a>
-            </div>            
+            </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 
 </div>
 @endsection
 
- 

@@ -361,7 +361,8 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                             <div class="draftsp11">Suggested tags</div>
-                            <div class="suggestedTags">
+                            <hr style="margin: 0px;">
+                            <div class="suggestedTags" style="height:80px;">
                                 @foreach($tagsSuggteds as $tags)
                                 @if ($tags->product_id == $product->id)
                                 @foreach (explode(',',$tags->tags) as $tag)
