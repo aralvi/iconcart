@@ -12,8 +12,8 @@
         <div class=" offset-lg-2 col-lg-3  col-md-6 col-sm-12 col-12">
              <div class="indboxs pt-3 pr-3 pl-3">
                  <a style="text-decoration: none !important;" href="{{url('vendor/photo/upload')}}">
-                     <div class="pb-4 pt-4" style="border:1px dashed black;border-radius: 12px;" >
-                     <img src="assets/images/c2.PNG" alt="">
+                    <div class="pb-4 pt-4" style="border:1px dashed black;border-radius: 12px;" >
+                    <img src="{{asset('assets/images/c2.PNG')}}" alt="">
                  <h3 class="indboxh3">Upload New</h3>
                  </div>
                  </a>

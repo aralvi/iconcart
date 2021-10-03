@@ -392,11 +392,11 @@
             <div class="modal-body">
                 <div class="uploadrightdiv">
                     <div class="uplrin text-center">
-                        <form action="{{$products[0]->category_id == 1 ?  route('icons.drafts'):($products[0]->category_id == 2 ? route('illustrations.drafts'): route('icons.drafts')) }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
+                        <form action="{{$products[0]->category_id == 1 ?  route('icons.drafts'):($products[0]->category_id == 2 ?route('illustrations.drafts'): route('icons.drafts')) }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
                             @csrf
     <input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
                             <div class="upload">
-                                <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here" />
+                                <input type="file" id="file-input" name="file_uploads[]" multiple title="" class="drop-here" />
                                 <div class="text text-drop">
                                     <span class="h2 d-block">➕</span>
                                     <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>

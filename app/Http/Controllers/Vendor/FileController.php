@@ -21,12 +21,12 @@ class FileController extends Controller
         // dd($request->file('icons_upload'));
         $category = Category::where('name','icon')->first();
         $request->validate([
-            'icons_upload' => 'required|array',
-            'icons_upload.*' => 'required|image|mimes:svg',
+            'file_uploads' => 'required|array',
+            'file_uploads.*' => 'required|image|mimes:svg',
           ]);
         //   $products=[];
         // $tagsSuggteds=[];
-          foreach ($request->file('icons_upload') as $key => $icon) {
+          foreach ($request->file('file_uploads') as $key => $icon) {
               $imagePath    = $icon;
               $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
               $extension    = $icon->getClientOriginalExtension();
@@ -70,8 +70,8 @@ class FileController extends Controller
         $array             = array(".jpg",".jpeg",".png");
         $category          = Category::where('name','photo')->first();
         $request->validate([
-            'illustration'  => 'required|array',
-            'illustration.*'  => 'image|mimes:png,jpg',
+            'file_uploads'  => 'required|array',
+            'file_uploads.*'  => 'image|mimes:png,jpg',
           ]);
         //   if ($request->file('illustration')) {
         //     $imagePath      = $request->file('illustration');
@@ -95,7 +95,7 @@ class FileController extends Controller
         // if(isset($products)) {
         //     return view('icons.drafts',compact('products','tagsSuggteds'));
         // }
-        foreach ($request->file('illustration') as $key => $photo) {
+        foreach ($request->file('file_uploads') as $key => $photo) {
              $imagePath     = $photo;
             $imageName      = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
             $extension      = $photo->getClientOriginalExtension();

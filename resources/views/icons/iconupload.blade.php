@@ -234,7 +234,7 @@
             @csrf
             <input type="hidden" name="p_id" value="{{rand()}}">
               <div class="upload">
-  <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here">
+  <input type="file" id="file-input" name="file_uploads[]" multiple title="" class="drop-here">
   <div class="text text-drop">
                     <span class="h2 d-block">➕</span>
                     <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>
