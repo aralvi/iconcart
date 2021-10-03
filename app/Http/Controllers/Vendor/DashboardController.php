@@ -11,13 +11,13 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $icons  = Product::where('status',1)->whereHas('category', function($q){
+        $icons  = Product::whereIn('status',['0','1'])->whereHas('category', function($q){
              $q->where('name', '=', 'icon');
         })->get();
-        $photos   = Product::where('status',1)->whereHas('category', function($q){
+        $photos   = Product::whereIn('status',['0','1'])->whereHas('category', function($q){
            $q->where('name', '=', 'photo');
         })->get();
-        $vectors  = Product::where('status',1)->whereHas('category', function($q){
+        $vectors  = Product::whereIn('status',['0','1'])->whereHas('category', function($q){
             $q->where('name', '=', 'vector');
         })->get();
       return view('home',compact('icons','photos','vectors'));

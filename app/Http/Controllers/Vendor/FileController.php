@@ -176,6 +176,7 @@ class FileController extends Controller
        $products->name = $request->title[$key];
        $products->tags = $request->$tags;
        $products->status = 1;
+       $products->p_id = rand();
        $products->update();
        }
         return redirect(url('home'));
