@@ -351,9 +351,9 @@
                         </div>
                     </div>
                     <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 150px; overflow-y: scroll;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 120px; overflow-y: scroll;">
                             <span class="draftsp12">1/50 Tags (4 required)</span><br />
-
+                            <span></span>
                             <textarea class="input1 p-3" data-taginput="taginput{{$key}}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
@@ -363,7 +363,7 @@
                                 @if ($tags->product_id == $product->id)
                                 @foreach (explode(',',$tags->tags) as $tag)
 
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">{{$tag}}</span>
+                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">{{$tag}}+</span>
                                 @endforeach
 
                                 @endif
@@ -374,20 +374,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row ml-1 py-2">
-                    <div class="uploadrowbt3">
-                        <div class="uploadexmbt3nw"><img src="assets/images/tick.1318965.svg" alt="" /> JSON</div>
-                    </div>
-                    <div class="uploadrowbt2">
-                        <button class="btn uploadexmbt2 border">+ JSON</button>
-                    </div>
-                    <div class="uploadrowbt2">
-                        <button class="btn uploadexmbt2 border">+ AEP</button>
-                    </div>
-                    <div class="uploadrowbt2">
-                        <button class="btn uploadexmbt2 border">+ ZIP</button>
-                    </div>
-                </div>
+
             </div>
 
             @endforeach
@@ -404,7 +391,7 @@
                     <div class="uplrin text-center">
                         <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
                             @csrf
-<input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
+    <input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
                             <div class="upload">
                                 <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here" />
                                 <div class="text text-drop">

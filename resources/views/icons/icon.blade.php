@@ -26,7 +26,7 @@
                     <div>
                       <img src="{{asset('assets/images/c3.PNG')}}"  alt="">
                       <h3 class="indboxh3">Live in Store</h3>
-                      <p class="indboxp1">{{ $icons->count() }} icons</p>
+                      <p class="indboxp1">0 icons</p>
                     </div>
                  </a>
              </div>
@@ -50,7 +50,7 @@
                     <div>
                       <img src="{{asset('assets/images/c4.PNG')}}"  alt="">
                       <h3 class="indboxh3">Under Review</h3>
-                      <p class="indboxp1"> icons</p>
+                      <p class="indboxp1">{{$reviews->count()}} icons</p>
                     </div>
                  </a>
              </div>
@@ -61,7 +61,7 @@
                     <div>
                       <img src="{{asset('assets/images/c5.PNG')}}"  alt="">
                       <h3 class="indboxh3">Need To Improve</h3>
-                      <p class="indboxp1">{{ $icons->count() }} icons</p>
+                      <p class="indboxp1">0 icons</p>
                     </div>
                  </a>
              </div>

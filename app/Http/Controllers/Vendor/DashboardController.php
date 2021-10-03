@@ -8,26 +8,26 @@ use App\Product;
 
 class DashboardController extends Controller
 {
-    
+
     public function index()
     {
         $icons  = Product::where('status',1)->whereHas('category', function($q){
              $q->where('name', '=', 'icon');
-        })->get(); 
+        })->get();
         $photos   = Product::where('status',1)->whereHas('category', function($q){
            $q->where('name', '=', 'photo');
-        })->get();     
+        })->get();
         $vectors  = Product::where('status',1)->whereHas('category', function($q){
             $q->where('name', '=', 'vector');
-        })->get();    
+        })->get();
       return view('home',compact('icons','photos','vectors'));
     }
 
     public function  iconsCounter()
     {
-        $icons    = Product::where('status',1)->whereHas('category', function($q){
+        $icons    = Product::whereIn('status',[0,1])->whereHas('category', function($q){
             $q->where('name', '=', 'icon');
-       })->get();  
+       })->get();
         $reviews  = Product::where('status',3)->whereHas('category', function($q){
           $q->where('name', '=', 'icon');
        })->get();         return view('icons.icon',compact('icons','reviews'));
@@ -37,7 +37,7 @@ class DashboardController extends Controller
     {
         $photos    = Product::where('status',1)->whereHas('category', function($q){
             $q->where('name', '=', 'photo');
-       })->get();  
+       })->get();
         $reviews  = Product::where('status',3)->whereHas('category', function($q){
             $q->where('name', '=', 'photo');
        })->get();         return view('illustrations.illustrations',compact('photos','reviews'));
@@ -47,10 +47,10 @@ class DashboardController extends Controller
     {
         $vectors    = Product::where('status',1)->whereHas('category', function($q){
             $q->where('name', '=', 'vector');
-       })->get();  
+       })->get();
         $reviews  = Product::where('status',3)->whereHas('category', function($q){
             $q->where('name', '=', 'vector');
-       })->get(); 
+       })->get();
         return view('vectors.vector',compact('vectors','reviews'));
     }
 }

@@ -160,7 +160,7 @@ class FileController extends Controller
 
     public function iconsDraftShow()
     {
-         $products = Product::where('status','1')->whereHas('category',function($q){
+         $products = Product::whereIn('status',[0,1])->whereHas('category',function($q){
              $q->where('name','=','icon');
          })->get();
         return view('icons.icon-drafts-show',compact('products'));
