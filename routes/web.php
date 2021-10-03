@@ -68,7 +68,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::get('/icon-drafts-delete/{id}','FileController@iconDestroy')->name('icon.delete');
     Route::post('/icon-drafts-delete-all/{id}','FileController@iconDestroy')->name('icon.delete.all');
     Route::get('/photo','DashboardController@photoCounter');
-    Route::get('/photo/upload',function(){ return view('illustrations.illustrationsuplaod');});
+    Route::get('/photo/upload',function(){ return view('photos.illustrationsuplaod');});
     Route::get('/photo-draft-show','FileController@photosDraftShow');
     Route::get('/photo-draft-edit/{id}','FileController@photoEdit')->name('photo.edit');
     Route::get('/illustration','DashboardController@vectorCounter');
@@ -99,13 +99,13 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::get('/icons/review','FileController@iconsReview');
 
     Route::get('/photos/needtoimprove',function(){
-        return view('illustrations.needtoimprove');
+        return view('photos.needtoimprove');
     });
     Route::get('/photos/rejected',function(){
-        return view('illustrations.rejected');
+        return view('photos.rejected');
     });
     Route::get('/photos/live-store',function(){
-        return view('illustrations.liveinstore');
+        return view('photos.liveinstore');
     });
     Route::get('/photos/review','FileController@photoReview');
 

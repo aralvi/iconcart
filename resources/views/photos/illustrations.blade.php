@@ -1,4 +1,5 @@
 @extends('layouts.vendor')
+@section('title','My Photos')
 
 @section('content')
 <div class="container indmain1">
@@ -24,7 +25,7 @@
                     <div>
                     <img src="{{asset('assets/images/Capture.PNG')}}" alt="">
                       <h3 class="indboxh3">Live in Store</h3>
-                 <p class="indboxp1">{{$photos->count()}} photos</p>
+                 <p class="indboxp1">0 photos</p>
                     </div>
                  </a>
              </div>
@@ -59,7 +60,7 @@
                     <div>
                       <img src="{{asset('assets/images/c4.PNG')}}"  alt="">
                         <h3 class="indboxh3">Need to Improve</h3>
-                         <p class="indboxp1">{{$photos->count()}} photos</p>
+                         <p class="indboxp1">0 photos</p>
                     </div>
                  </a>
              </div>
@@ -70,7 +71,7 @@
                     <div>
                       <img src="{{asset('assets/images/c6.PNG')}}"  alt="">
                         <h3 class="indboxh3">Rejected</h3>
-                         <p class="indboxp1">{{$photos->count()}} photos</p>
+                         <p class="indboxp1">0 photos</p>
                     </div>
                  </a>
              </div>

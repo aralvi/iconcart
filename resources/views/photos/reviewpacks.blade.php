@@ -1,4 +1,4 @@
-@extends('layouts.vendor') @section('title','Icon') @section('content')
+@extends('layouts.vendor') @section('title','Photo') @section('content')
 {{-- <div class="container-fluid topheader-vendor">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -29,7 +29,7 @@
         <!-- /gn-scroller -->
     </nav>
     <div class="container-fluid indmain2">
-        <span class="uploadp"> My Icons</span><br />
+        <span class="uploadp">< My Icons</span><br />
         <div class="row">
             <div class="col-lg-7 col-md-12 col-sm-12 col-12">
                 <span class="indmainh1 mt-2">Under Review Packs</span>
@@ -58,9 +58,9 @@
                             <div class="row">
                                 @foreach($products as $product)
                                 <div class="col-lg-2 col-md-2 col-sm-12 col-12 drtaall text-center">
-                                    <img src="{{asset('public/images/icons/'.$product['name'])}}" style="width: 100%; height: 130px; border: 1px solid black; border-radius: 8px;" alt="" />
+                                    <img src="{{url('images/icons/'.$product['name'])}}" style="width: 100%; height: 130px; border: 1px solid black; border-radius: 8px;" alt="" />
                                     <i class="fa fa-ellipsis-v alldraftfa"></i>
-                                    <span class="text-black">{{$product['name']}}</span><span class="uploadp ml-1">(1 icons)</span>
+                                    <span class="text-black">no name</span><span class="uploadp ml-1">(0 icons)</span>
                                 </div>
                                 @endforeach
                             </div>

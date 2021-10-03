@@ -1,4 +1,6 @@
-@extends('layouts.vendor') @section('title','Icon') @section('content')
+@extends('layouts.vendor')
+ @section('title',$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration'))
+ @section('content')
 <link rel="stylesheet" href="{{asset('public/asset/tagify.css')}}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="{{asset('public/asset/jQuery.tagify.min.js')}}"></script>
@@ -248,9 +250,9 @@
 </style>
 
 <div class="container-fluid indmain2">
-    <span class="uploadp"> My Icons</span><br />
+    <span class="uploadp"> My {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span><br />
     <div class="row">
-        <div class="col-lg-3 col-md-12 col-sm-12 col-12"><span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">1 Icons</span></div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12"><span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">{{$products->count()}} {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span></div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="row float-right">
                 <div class="uploadrowbt2">
@@ -354,7 +356,8 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 120px; overflow-y: scroll;">
                             <span class="draftsp12">1/50 Tags (4 required)</span><br />
                             <span></span>
-                            <textarea class="input1 p-3" data-taginput="taginput{{$key}}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
+                            <textarea style="display: none;" class="input1 p-3" data-taginput="taginput{{$key}}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
+                            <div class="tags-input-wrapper"><input type="text" data-taginput="taginput{{$key}}[]" onkeydown="addTags(this)"></div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                             <div class="draftsp11">Suggested tags</div>
@@ -363,7 +366,7 @@
                                 @if ($tags->product_id == $product->id)
                                 @foreach (explode(',',$tags->tags) as $tag)
 
-                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">{{$tag}}+</span>
+                                <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">{{$tag}}</span>
                                 @endforeach
 
                                 @endif
@@ -389,7 +392,7 @@
             <div class="modal-body">
                 <div class="uploadrightdiv">
                     <div class="uplrin text-center">
-                        <form action="{{ route('icons.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
+                        <form action="{{$products[0]->category_id == 1 ?  route('icons.drafts'):($products[0]->category_id == 2 ? route('illustrations.drafts'): route('icons.drafts')) }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
                             @csrf
     <input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
                             <div class="upload">

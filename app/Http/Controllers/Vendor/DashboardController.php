@@ -35,12 +35,12 @@ class DashboardController extends Controller
 
     public function  photoCounter()
     {
-        $photos    = Product::where('status',1)->whereHas('category', function($q){
+        $photos    = Product::whereIn('status',[0,1])->whereHas('category', function($q){
             $q->where('name', '=', 'photo');
        })->get();
         $reviews  = Product::where('status',3)->whereHas('category', function($q){
             $q->where('name', '=', 'photo');
-       })->get();         return view('illustrations.illustrations',compact('photos','reviews'));
+       })->get();         return view('photos.illustrations',compact('photos','reviews'));
     }
 
     public function  vectorCounter()

@@ -22,7 +22,7 @@ class FileController extends Controller
         $category = Category::where('name','icon')->first();
         $request->validate([
             'icons_upload' => 'required|array',
-            'icons_upload.*' => 'required|image|mimes:png,svg,ico,eps,ai,pdf',
+            'icons_upload.*' => 'required|image|mimes:svg',
           ]);
         //   $products=[];
         // $tagsSuggteds=[];
@@ -70,27 +70,66 @@ class FileController extends Controller
         $array             = array(".jpg",".jpeg",".png");
         $category          = Category::where('name','photo')->first();
         $request->validate([
-            'illustration'  => 'required|image|mimes:png,jpg',
+            'illustration'  => 'required|array',
+            'illustration.*'  => 'image|mimes:png,jpg',
           ]);
-          if ($request->file('illustration')) {
-            $imagePath      = $request->file('illustration');
+        //   if ($request->file('illustration')) {
+        //     $imagePath      = $request->file('illustration');
+        //     $imageName      = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
+        //     $extension      = $request->file('illustration')->getClientOriginalExtension();
+        //     $fileNames      = explode(",",$imageName);
+        //     $fileEx         = $fileNames[0].'.'.$extension;
+        //     $path           = $request->file('illustration')->move(public_path('images/icons'),$fileEx);
+        //     $str            = str_replace($array, "", $imageName);
+        //     $suggetedTags   = Suggested::create(['tags'=>$str]);
+        //   }
+
+        // $products = Product::create([
+        //     'name'          =>  $fileEx,
+        //     'image'         =>  $fileNames[0],
+        //     'category_id'   =>  $category->id,
+        //     'tags'          =>  $imageName,
+        // ]);
+        // $tags              = DB::table('suggesteds')->where('tags',$imageName)->get();
+        // $tagsSuggteds      = explode(",",$tags);
+        // if(isset($products)) {
+        //     return view('icons.drafts',compact('products','tagsSuggteds'));
+        // }
+        foreach ($request->file('illustration') as $key => $photo) {
+             $imagePath     = $photo;
             $imageName      = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension      = $request->file('illustration')->getClientOriginalExtension();
+            $extension      = $photo->getClientOriginalExtension();
             $fileNames      = explode(",",$imageName);
             $fileEx         = $fileNames[0].'.'.$extension;
-            $path           = $request->file('illustration')->move(public_path('images/icons'),$fileEx);
+            $path           = $photo->move(public_path('images/icons'),$fileEx);
             $str            = str_replace($array, "", $imageName);
             $suggetedTags   = Suggested::create(['tags'=>$str]);
-          }
 
-        $products = Product::create([
-            'name'          =>  $fileEx,
-            'image'         =>  $fileNames[0],
-            'category_id'   =>  $category->id,
-            'tags'          =>  $imageName,
-        ]);
-        $tags              = DB::table('suggesteds')->where('tags',$imageName)->get();
-        $tagsSuggteds      = explode(",",$tags);
+              $product     =   new Product();
+              $product->user_id       =  Auth::user()->id;
+              $product->p_id       =  $request->p_id;
+                  $product->name          =  $fileEx;
+                  $product->image        =  $fileNames[0];
+                  $product->category_id   =  $category->id;
+                  $product->tags          =  $imageName;
+                  $product->save();
+                $suggetedTags = new Suggested();
+                $suggetedTags->product_id=$product->id;
+                $suggetedTags->tags= $imageName;
+                $suggetedTags->save();
+
+            //   array_push($products,$product);
+              $tagsSuggted      = explode(",",$imageName);
+            //   array_push($tagsSuggteds,$tagsSuggted);
+          }
+          $products = Product::where('status','0')->where('p_id',$request->p_id)->get();
+          $productsArray = Product::where('status','0')->where('p_id',$request->p_id)->pluck('id')->toArray();
+
+          $tagsSuggteds = Suggested::whereIn('product_id',$productsArray)->get();
+        //   dd($tagsSuggteds);
+
+
+    //    dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
@@ -172,7 +211,7 @@ class FileController extends Controller
          $products = Product::where('status','1')->whereHas('category',function($q){
             $q->where('name','=','photo');
         })->get();
-        return view('illustrations.photo-draft-show',compact('products'));
+        return view('photos.photo-draft-show',compact('products'));
 
     }
 
@@ -235,7 +274,7 @@ class FileController extends Controller
         $products      = Product::where('status','3')->whereHas('category',function($q){
             $q->where('name','=','photo');
         })->get();
-        return view('illustrations.reviewpacks',compact('products'));
+        return view('photo.reviewpacks',compact('products'));
 
     }
     public function vectorReview()

@@ -48,7 +48,7 @@
                         </li>
                         <li><a href="{{url('vendor/photo')}}" class="gn-icon fa fa-ravelry"></a>
                         </li>
-                        <li><a href="{{url('vendor/vector')}}" class="gn-icon fa fa-cube"></a>
+                        <li><a href="{{url('vendor/illustration')}}" class="gn-icon fa fa-cube"></a>
                         </li>
                         <li><a href="{{url('vendor/stats')}}" class="gn-icon fa fa-bar-chart"></a>
                         </li>
