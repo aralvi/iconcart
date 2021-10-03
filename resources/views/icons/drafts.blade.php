@@ -252,7 +252,7 @@
 <div class="container-fluid indmain2">
     <span class="uploadp"> My {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span><br />
     <div class="row">
-        <div class="col-lg-3 col-md-12 col-sm-12 col-12"><span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">{{$products->count()}} {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span></div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12"><span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">{{count($products)}} {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span></div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="row float-right">
                 <div class="uploadrowbt2">
@@ -462,14 +462,18 @@
     }
 
     const addDataToItem = () => {
+        $("#advancedDiv").toggle();
         if (assets.value) {
             $(".productTitle").val(assets.value);
+            assets.value = ''
         }
         if (assetPrice.value) {
             $(".productPrice").val(assetPrice.value);
+            assetPrice.value=''
         }
         if (assetDescription.value) {
             $(".productDescription").val(assetDescription.value);
+            assetDescription.value=''
         }
         // console.log( JSON.parse($("#assetTags").val())[0].value);
         let i = 0;

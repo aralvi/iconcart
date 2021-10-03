@@ -208,7 +208,7 @@ class FileController extends Controller
 
     public function photosDraftShow()
     {
-         $products = Product::where('status','1')->whereHas('category',function($q){
+         $products = Product::whereIn('status',['0','1'])->whereHas('category',function($q){
             $q->where('name','=','photo');
         })->get();
         return view('photos.photo-draft-show',compact('products'));
@@ -230,24 +230,28 @@ class FileController extends Controller
     {
         $products=[];
         // $tagsSuggteds=[];
-        $product      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
+        $product      = Product::where('id',$id)->whereIn('status',['0','1'])->whereHas('category',function($q){
             $q->where('name','=','icon');
         })->first();
         array_push($products,$product);
         $tagsSuggted  = explode(",",$product->tags);
         // array_push($tagsSuggteds,$tagsSuggted);
         $tagsSuggteds = Suggested::where('product_id',$product->id)->get();
-
         return view('icons.drafts',compact('products','tagsSuggteds'));
 
     }
 
     public function photoEdit($id)
     {
-        $products      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
+       $products=[];
+        // $tagsSuggteds=[];
+        $product      = Product::where('id',$id)->whereIn('status',['0','1'])->whereHas('category',function($q){
             $q->where('name','=','photo');
         })->first();
-        $tagsSuggteds  = explode(",",$products->tags);
+        array_push($products,$product);
+        $tagsSuggted  = explode(",",$product->tags);
+        // array_push($tagsSuggteds,$tagsSuggted);
+        $tagsSuggteds = Suggested::where('product_id',$product->id)->get();
         return view('icons.drafts',compact('products','tagsSuggteds'));
 
     }
