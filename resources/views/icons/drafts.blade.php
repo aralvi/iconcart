@@ -446,7 +446,26 @@
         this.classList.add("drop");
 
         setTimeout(() => this.classList.add("done"), 3000);
-        setTimeout(() => $("#image-upload").submit(), 5000);
+        setTimeout(function() {
+        // $("#image-upload").submit()
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $("#image-upload");
+            var url = $("#image-upload").attr('action');
+            
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {_token:'{{ csrf_token() }}',file_uploads:4('#file-input')[0].files}, // serializes the form's elements.
+                success: function(data)
+                {
+                    alert(data); // show response from the php script.
+                }
+                });
+                }
+        
+        
+        , 5000);
     }
 
     $(document).ready(function () {
