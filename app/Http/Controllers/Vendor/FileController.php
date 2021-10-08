@@ -63,6 +63,54 @@ class FileController extends Controller
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
     }
+    public function uploadIcon(Request $request)
+    {
+        dd($request->all());
+        // dd($request->file('icons_upload'));
+        $category = Category::where('name','icon')->first();
+        $request->validate([
+            'file_uploads' => 'required|array',
+            'file_uploads.*' => 'required|image|mimes:svg',
+          ]);
+          $products=[];
+        $tagsSuggteds=[];
+          foreach ($request->file('file_uploads') as $key => $icon) {
+              $imagePath    = $icon;
+              $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
+              $extension    = $icon->getClientOriginalExtension();
+              $fileNames    = explode(",",$imageName);
+              $fileEx       = $fileNames[0].'.'.$extension;
+              $path         = $icon->move(public_path('images/icons'),$fileEx);
+
+              $product     =   new Product();
+              $product->user_id       =  Auth::user()->id;
+              $product->p_id       =  $request->p_id;
+                  $product->name          =  $fileEx;
+                  $product->image        =  $fileNames[0];
+                  $product->category_id   =  $category->id;
+                  $product->tags          =  $imageName;
+                  $product->save();
+                $suggetedTags = new Suggested();
+                $suggetedTags->product_id=$product->id;
+                $suggetedTags->tags= $imageName;
+                $suggetedTags->save();
+
+              array_push($products,$product);
+              $tagsSuggted      = explode(",",$imageName);
+              array_push($tagsSuggteds,$tagsSuggted);
+          }
+        //   $products = Product::where('status','0')->where('p_id',$request->p_id)->get();
+        //   $productsArray = Product::where('status','0')->where('p_id',$request->p_id)->pluck('id')->toArray();
+
+        //   $tagsSuggteds = Suggested::whereIn('product_id',$productsArray)->get();
+        //   dd($tagsSuggteds);
+
+
+    //    dd($products);
+        if(isset($products)) {
+            return view('icons.drafts',compact('products','tagsSuggteds'));
+        }
+    }
 
 
     public function photoUpload(Request $request)

@@ -79,6 +79,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::get('/animation/upload',function(){ return view('animations.animationupload');});
 
     Route::post('/icon/draft','FileController@uploadFile')->name('icons.drafts');
+    Route::post('/icon/upload/more','FileController@uploadIcon')->name('icons.upload.more');
     Route::post('/illustrations/upload','FileController@photoUpload')->name('illustrations.drafts');
     Route::post('/illustration/upload','FileController@vectorUpload')->name('illustration.drafts');
     // Route::post('/drafts/save/{id}','FileController@saveDrafts')->name('save.drafts');

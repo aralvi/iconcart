@@ -393,7 +393,7 @@
             <div class="modal-body">
                 <div class="uploadrightdiv">
                     <div class="uplrin text-center">
-                        <form action="{{$products[0]->category_id == 1 ?  route('icons.drafts'):($products[0]->category_id == 2 ?route('illustrations.drafts'): route('icons.drafts')) }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
+                        <form action="{{$products[0]->category_id == 1 ?  route('icons.upload.more'):($products[0]->category_id == 2 ?route('illustrations.drafts'): route('icons.drafts')) }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
                             @csrf
     <input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
                             <div class="upload">
