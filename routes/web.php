@@ -61,6 +61,14 @@ Route::get('/home','Vendor\DashboardController@index')->middleware('verified');
 
 
 Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],function(){
+
+    // profile section routes
+    Route::resource('/profile', 'Admin\ProfileController');
+    Route::post('/profile/change_avatar', 'Admin\ProfileController@update_avatar');
+    Route::post('/password', 'Admin\ProfileController@update_password');
+
+
+
     Route::get('/icon','DashboardController@iconsCounter');
     Route::get('/icon/upload',function(){ return view('icons.iconupload');});
     Route::get('/icon-drafts-show','FileController@iconsDraftShow');
