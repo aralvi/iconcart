@@ -81,6 +81,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],func
     Route::post('/icon/draft','FileController@uploadFile')->name('icons.drafts');
     Route::post('/icon/upload/more','FileController@uploadIcon')->name('icons.upload.more');
     Route::post('/illustrations/upload','FileController@photoUpload')->name('illustrations.drafts');
+    Route::post('/photos/upload/more','FileController@photoUploadMore')->name('photos.upload.more');
     Route::post('/illustration/upload','FileController@vectorUpload')->name('illustration.drafts');
     // Route::post('/drafts/save/{id}','FileController@saveDrafts')->name('save.drafts');
     Route::post('/drafts/all/save','FileController@saveDrafts')->name('save.all.drafts');

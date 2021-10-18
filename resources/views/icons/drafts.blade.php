@@ -248,21 +248,21 @@
         }
     }
 </style>
-
 <div class="container-fluid indmain2">
     <span class="uploadp"> My {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span><br />
     <div class="row">
-        <div class="col-lg-3 col-md-12 col-sm-12 col-12"><span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">{{count($products)}} {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span></div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+            <span class="indmainh1 mt-2">My Drafts</span><span class="uploadp ml-3">{{count($products)}} {{$products[0]->category_id == 1 ? 'Icons':($products[0]->category_id == 2 ?'Photos':'Illustration')}}</span>
+        </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="row float-right">
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2" onclick="submitForm(this,'{{ route('save.all.drafts') }}')">
                         Save Draft
-
                     </button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2" onclick="submitForm(this,'{{route('icon.delete.all',$products[0]['id'])}}?delete=all')"> Delete Draft</button>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this,'{{route('icon.delete.all',$products[0]['id'])}}?delete=all')">Delete Draft</button>
                 </div>
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2" data-toggle="modal" data-target="#exampleModal">Upload More</button>
@@ -271,14 +271,13 @@
                     <button class="btn uploadexmbt2" id="advandedOption">Advanced Options</button>
                 </div>
                 <div class="uploadrowbt2">
-                    <button class="btn uploadexmbt2"  onclick="submitForm(this,'{{ route('submit-as-pack.drafts',$products[0]['id']) }}?pack=individual')">
-                          Submit as Individual
-                        </button>
+                    <button class="btn uploadexmbt2" onclick="submitForm(this,'{{ route('submit-as-pack.drafts',$products[0]['id']) }}?pack=individual')">
+                        Submit as Individual
+                    </button>
                 </div>
                 <div class="uploadrowbt2">
                     <button class="btn uploadexmbt2" onclick="submitForm(this,'{{ route('submit-as-pack.drafts',$products[0]['id']) }}?pack=pack')">
                         Submit as pack
-
                     </button>
                 </div>
             </div>
@@ -302,7 +301,7 @@
                             <input type="number" class="form-control" id="assetPrice" />
                         </div>
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Tags</label>
                             <textarea name="basic" class="form-control" autofocus rows="5" id="assetTags"></textarea>
@@ -326,7 +325,7 @@
 
     <form action="{{ route('save.all.drafts') }}" method="post" id="all-products-form" onkeypress="return event.keyCode != 13;">
         @csrf
-        <div class="row">
+        <div class="row" id="show-media">
             @foreach ($products as $key=> $product)
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-12">
@@ -357,28 +356,20 @@
                             <span class="draftsp12">1/50 Tags (4 required)</span><br />
                             <span></span>
                             <textarea style="display: none;" class="input1 p-3" data-taginput="taginput{{$key}}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
-                            <div class="tags-input-wrapper"><input type="text" data-taginput="taginput{{$key}}[]" onkeydown="addTags(this)"></div>
+                            <div class="tags-input-wrapper"><input type="text" data-taginput="taginput{{$key}}[]" onkeydown="addTags(this)" /></div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
                             <div class="draftsp11">Suggested tags</div>
-                            <hr style="margin: 0px;">
-                            <div class="suggestedTags" style="height:80px;">
-                                @foreach($tagsSuggteds as $tags)
-                                @if ($tags->product_id == $product->id)
-                                @foreach (explode(',',$tags->tags) as $tag)
+                            <hr style="margin: 0px;" />
+                            <div class="suggestedTags" style="height: 80px;">
+                                @foreach($tagsSuggteds as $tags) @if ($tags->product_id == $product->id) @foreach (explode(',',$tags->tags) as $tag)
 
                                 <span class="cp badge badge-info appendTag" data-taginput="taginput{{$key}}[]" onclick="suggestionTagAppend(this)">{{$tag}}</span>
-                                @endforeach
-
-                                @endif
-                                @endforeach
-
+                                @endforeach @endif @endforeach
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
 
             @endforeach
@@ -392,10 +383,16 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="uploadrightdiv">
-                    <div class="uplrin text-center">
-                        <form action="{{$products[0]->category_id == 1 ?  route('icons.upload.more'):($products[0]->category_id == 2 ?route('illustrations.drafts'): route('icons.drafts')) }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload">
+                    <div class="uplrin text-center" id="modalForm">
+                        <form
+                            action="{{$products[0]->category_id == 1 ?  route('icons.upload.more'):($products[0]->category_id == 2 ?route('photos.upload.more'): route('icons.drafts')) }}"
+                            method="POST"
+                            enctype="multipart/form-data"
+                            class="w-100 h-100"
+                            id="image-upload"
+                        >
                             @csrf
-    <input type="hidden" name="p_id" value="{{$products[0]['p_id']}}">
+                            <input type="hidden" name="p_id" value="{{$products[0]['p_id']}}" />
                             <div class="upload">
                                 <input type="file" id="file-input" name="file_uploads[]" multiple title="" class="drop-here" />
                                 <div class="text text-drop">
@@ -420,7 +417,8 @@
 
 <!-- <input type="text" id="tag-input1"> -->
 
-@endsection @push('scripts') @parent
+@endsection @push('scripts')
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     // Code By Webdevtrick ( https://webdevtrick.com )
     var fileUpload = document.querySelector(".upload");
@@ -436,7 +434,6 @@
 
     fileUpload.addEventListener("drop", start, false);
     fileUpload.addEventListener("change", start, false);
-
     $("input#file-input").change(function () {
         var files = $(this)[0].files;
         $(".text-upload").text("Uploading \n" + files.length + "/" + files.length + " files");
@@ -448,23 +445,95 @@
         setTimeout(() => this.classList.add("done"), 3000);
         setTimeout(function() {
         // $("#image-upload").submit()
-        e.preventDefault(); // avoid to execute the actual submit of the form.
 
-            var form = $("#image-upload");
             var url = $("#image-upload").attr('action');
-            
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {_token:'{{ csrf_token() }}',file_uploads:4('#file-input')[0].files}, // serializes the form's elements.
-                success: function(data)
-                {
-                    alert(data); // show response from the php script.
+             var fd = new FormData();
+        var files = $("input#file-input")[0].files;
+
+        // Check file selected or not
+
+
+        if(files.length > 0 ){
+            for (let index = 0; index < files.length; index++) {
+           fd.append('file_uploads[]',files[index]);
+            }
+            fd.append('_token','{{csrf_token()}}')
+            fd.append('p_id',"{{$products[0]['p_id']}}")
+           $.ajax({
+              url: url,
+              type: 'post',
+              data: fd,
+              contentType: false,
+              processData: false,
+              success: function(response){
+                  console.log(response);
+                    response.products.map((item, index) => {
+                        var key = Number(index)+Number('{{$key}}')+1;
+                        var tags ='';
+                response.tagsSuggteds[index].map((tag,tagIndex)=> {
+
+            tags +=`<span class="cp badge badge-info appendTag" data-taginput="taginput${key}[]" onclick="suggestionTagAppend(this)">${tag}</span>`
+                                })
+                    $('#show-media').append(`
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                <div class="draftouterdiv mt-4">
+                    <div class="text-center">
+                        <img src="{{url('public/images/icons/')}}/${item['name']}" class="draftimg1" alt="" />
+                    </div>
+
+                    <div class="row" style="border-top: 1px solid #d8dbeb; border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
+                        <input type="hidden" class="draftin2" value="${item['id']}" name="id[]" id="" />
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-9 px-0 border-right">
+                            <input type="text" class="draftin1 productTitle" value="${item['name']}" name="title[]" id="productTitle" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-3 pr-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>$</span>
+                                <input type="text" class="draftin2 border-0 pl-1 productPrice" value="10" name="price[]" id="productPrice" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
+                        <div class="col-lg-12 col-md-12 col-sm-2 col-2">
+                            <input type="text" class="draftin3 productDescription" placeholder="Description" name="description[]" id="productDescription" />
+                        </div>
+                    </div>
+                    <div class="row" style="border-bottom: 1px solid #d8dbeb; width: 99%; margin: auto;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 120px; overflow-y: scroll;">
+                            <span class="draftsp12">1/50 Tags (4 required)</span><br />
+                            <span></span>
+                            <textarea style="display: none;" class="input1 p-3" data-taginput="taginput${key}[]" cols="35" rows="2" onmouseenter="addDivs(this)"></textarea>
+                            <div class="tags-input-wrapper"><input type="text" data-taginput="taginput${key}[]" onkeydown="addTags(this)"></div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="border-left: 1px solid #d8dbeb;">
+                            <div class="draftsp11">Suggested tags</div>
+                            <hr style="margin: 0px;">
+                            <div class="suggestedTags" style="height:80px;">
+
+                                ${tags}
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                    `);
+                    $("#image-upload").trigger("reset");
+                    $('.modal-backdrop.fade.show').remove()
+                    $('#exampleModal').toggle('modal')
+
+            $('.upload').removeClass("drop done")
+                    });
+              },
+           });
+        }
+
                 }
-                });
-                }
-        
-        
+
+
         , 5000);
     }
 

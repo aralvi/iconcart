@@ -38,6 +38,7 @@ class FileController extends Controller
               $product->user_id       =  Auth::user()->id;
               $product->p_id       =  $request->p_id;
                   $product->name          =  $fileEx;
+                  $product->media          =  $fileEx;
                   $product->image        =  $fileNames[0];
                   $product->category_id   =  $category->id;
                   $product->tags          =  $imageName;
@@ -65,8 +66,6 @@ class FileController extends Controller
     }
     public function uploadIcon(Request $request)
     {
-        dd($request->all());
-        // dd($request->file('icons_upload'));
         $category = Category::where('name','icon')->first();
         $request->validate([
             'file_uploads' => 'required|array',
@@ -86,16 +85,17 @@ class FileController extends Controller
               $product->user_id       =  Auth::user()->id;
               $product->p_id       =  $request->p_id;
                   $product->name          =  $fileEx;
+                  $product->media          =  $fileEx;
                   $product->image        =  $fileNames[0];
                   $product->category_id   =  $category->id;
                   $product->tags          =  $imageName;
                   $product->save();
+                  array_push($products,$product);
                 $suggetedTags = new Suggested();
                 $suggetedTags->product_id=$product->id;
                 $suggetedTags->tags= $imageName;
                 $suggetedTags->save();
 
-              array_push($products,$product);
               $tagsSuggted      = explode(",",$imageName);
               array_push($tagsSuggteds,$tagsSuggted);
           }
@@ -106,9 +106,8 @@ class FileController extends Controller
         //   dd($tagsSuggteds);
 
 
-    //    dd($products);
         if(isset($products)) {
-            return view('icons.drafts',compact('products','tagsSuggteds'));
+            return response()->json(['products'=>$products,'tagsSuggteds'=>$tagsSuggteds]);
         }
     }
 
@@ -121,28 +120,7 @@ class FileController extends Controller
             'file_uploads'  => 'required|array',
             'file_uploads.*'  => 'image|mimes:png,jpg',
           ]);
-        //   if ($request->file('illustration')) {
-        //     $imagePath      = $request->file('illustration');
-        //     $imageName      = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
-        //     $extension      = $request->file('illustration')->getClientOriginalExtension();
-        //     $fileNames      = explode(",",$imageName);
-        //     $fileEx         = $fileNames[0].'.'.$extension;
-        //     $path           = $request->file('illustration')->move(public_path('images/icons'),$fileEx);
-        //     $str            = str_replace($array, "", $imageName);
-        //     $suggetedTags   = Suggested::create(['tags'=>$str]);
-        //   }
 
-        // $products = Product::create([
-        //     'name'          =>  $fileEx,
-        //     'image'         =>  $fileNames[0],
-        //     'category_id'   =>  $category->id,
-        //     'tags'          =>  $imageName,
-        // ]);
-        // $tags              = DB::table('suggesteds')->where('tags',$imageName)->get();
-        // $tagsSuggteds      = explode(",",$tags);
-        // if(isset($products)) {
-        //     return view('icons.drafts',compact('products','tagsSuggteds'));
-        // }
         foreach ($request->file('file_uploads') as $key => $photo) {
              $imagePath     = $photo;
             $imageName      = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
@@ -157,6 +135,7 @@ class FileController extends Controller
               $product->user_id       =  Auth::user()->id;
               $product->p_id       =  $request->p_id;
                   $product->name          =  $fileEx;
+                  $product->media          =  $fileEx;
                   $product->image        =  $fileNames[0];
                   $product->category_id   =  $category->id;
                   $product->tags          =  $imageName;
@@ -180,6 +159,56 @@ class FileController extends Controller
     //    dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
+        }
+    }
+    public function photoUploadMore(Request $request)
+    {
+        $array             = array(".jpg",".jpeg",".png");
+        $category          = Category::where('name','photo')->first();
+        $request->validate([
+            'file_uploads'  => 'required|array',
+            'file_uploads.*'  => 'image|mimes:png,jpg',
+          ]);
+$products=[];
+        $tagsSuggteds=[];
+        foreach ($request->file('file_uploads') as $key => $photo) {
+             $imagePath     = $photo;
+            $imageName      = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension      = $photo->getClientOriginalExtension();
+            $fileNames      = explode(",",$imageName);
+            $fileEx         = $fileNames[0].'.'.$extension;
+            $path           = $photo->move(public_path('images/icons'),$fileEx);
+            $str            = str_replace($array, "", $imageName);
+            $suggetedTags   = Suggested::create(['tags'=>$str]);
+
+              $product     =   new Product();
+              $product->user_id       =  Auth::user()->id;
+              $product->p_id       =  $request->p_id;
+                  $product->name          =  $fileEx;
+                  $product->media          =  $fileEx;
+                  $product->image        =  $fileNames[0];
+                  $product->category_id   =  $category->id;
+                  $product->tags          =  $imageName;
+                  $product->save();
+                $suggetedTags = new Suggested();
+                $suggetedTags->product_id=$product->id;
+                $suggetedTags->tags= $imageName;
+                $suggetedTags->save();
+
+              array_push($products,$product);
+              $tagsSuggted      = explode(",",$imageName);
+              array_push($tagsSuggteds,$tagsSuggted);
+          }
+        //   $products = Product::where('status','0')->where('p_id',$request->p_id)->get();
+        //   $productsArray = Product::where('status','0')->where('p_id',$request->p_id)->pluck('id')->toArray();
+
+        //   $tagsSuggteds = Suggested::whereIn('product_id',$productsArray)->get();
+        //   dd($tagsSuggteds);
+
+
+    //    dd($products);
+        if(isset($products)) {
+           return response()->json(['products'=>$products,'tagsSuggteds'=>$tagsSuggteds]);
         }
     }
 
