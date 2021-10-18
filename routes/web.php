@@ -63,9 +63,9 @@ Route::get('/home','Vendor\DashboardController@index')->middleware('verified');
 Route::group(['prefix'=>'vendor','middleware'=>'web','namespace'=>'Vendor'],function(){
 
     // profile section routes
-    Route::resource('/profile', 'Admin\ProfileController');
-    Route::post('/profile/change_avatar', 'Admin\ProfileController@update_avatar');
-    Route::post('/password', 'Admin\ProfileController@update_password');
+    Route::resource('/profile', 'ProfileController');
+    Route::post('/profile/change_avatar', 'ProfileController@update_avatar');
+    Route::post('/password', 'ProfileController@update_password');
 
 
 

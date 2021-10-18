@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\User;
@@ -18,7 +18,7 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = Auth::user();
-        return view('admin.profile.change_profile',compact('profile'));
+        return view('profile.change_profile',compact('profile'));
     }
 
     /**
@@ -62,7 +62,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-  
+
     public function UserPassword()
     {
         $password = Auth::user();
@@ -70,7 +70,7 @@ class ProfileController extends Controller
     }
 
 
-  
+
     public function update_password(Request $request)
     {
 
@@ -126,15 +126,14 @@ class ProfileController extends Controller
 
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['nullable', 'string', 'max:255', 'unique:users,username,' . $profile->id],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $profile->id],
         ]);
 
-        $profile->username = $request->name;
+        $profile->name = $request->name;
         $profile->email = $request->email;
         $profile->save();
 
-        return redirect('/profile')->with('success', 'Profile updated successfully!');
+        return redirect('vendor/profile')->with('success', 'Profile updated successfully!');
     }
 
     /**

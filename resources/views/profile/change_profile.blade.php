@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.vendor')
 @section('title', 'Profile | ')
 
 @section('content')
@@ -14,8 +14,8 @@
 	    	@else
 	    		<img src="{{ asset('uploads/images/user/avatars/default.jpg')}}" id="avatar" style="width: 150px; height: 150px; float: left; border-radius: 50%; margin-right: 25px;">
 	    	@endif
-	        <h2 class="text-capitalize" style="margin-top: 10px; padding:10px;">{{ $profile->username }}'s Profile</h2>
-	        <form autocomplete="off"  action="{{ url('profile/change_avatar') }}" method="POST" enctype="multipart/form-data" style="margin-top: -15px;">
+	        <h2 class="text-capitalize" style="margin-top: 10px; padding:10px;">{{ $profile->name }}'s Profile</h2>
+	        <form autocomplete="off"  action="{{ url('vendor/profile/change_avatar') }}" method="POST" enctype="multipart/form-data" style="margin-top: -15px;">
 	        	@csrf
 	        	<label>Update Profile Image</label>
 	        	<br />
@@ -29,12 +29,12 @@
 
 	<div class="card">
 		<div class="card-body">
-			<form autocomplete="off"  action="{{ url('profile/'.$profile->id) }}" method="POST">
+			<form autocomplete="off"  action="{{ url('vendor/profile/'.$profile->id) }}" method="POST">
                 @csrf
                 @method('put')
 				<div class="form-group">
 				  	<label for="user_name">User Name*</label>
-				  	<input id="user_name" name="name" type="text" class="form-control" value="{{ old('name') ?? $profile->username }}" autocomplete="user_name" placeholder="Enter User Name">
+				  	<input id="user_name" name="name" type="text" class="form-control" value="{{ old('name') ?? $profile->name }}" autocomplete="user_name" placeholder="Enter User Name">
 
 				</div>
 				<div class="form-group">
@@ -58,7 +58,7 @@
 
 	<div class="card">
 		<div class="card-body">
-			<form autocomplete="off"  action="{{ url('/password') }}" method="POST">
+			<form autocomplete="off"  action="{{ url('vendor/password') }}" method="POST">
 				@csrf
 				<div class="form-group">
 				  	<label for="old_password">Old Password*</label>
