@@ -31,7 +31,9 @@ Route::get('/clear-all', function () {
 Route::get('/', function () {
     return view('index');
 });
-
+Route::view('contributer-terms', 'contributor-terms');
+Route::view('privacy-policy', 'privacy');
+Route::view('terms-of-use', 'terms');
 Auth::routes();
 Auth::routes(['verify' => true]);
 // Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');

@@ -33,7 +33,7 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 topvend-c2">
         <div class="dropdown show">
-        <a class="topvrna1" href="">Contributor Terms</a>
+        <a class="topvrna1" href="{{url('contributer-terms')}}">Contributor Terms</a>
   <a class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <img src="{{asset('assets/images/91.jpg')}}" class="imgventop" alt="">
   </a>

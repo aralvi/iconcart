@@ -197,11 +197,11 @@
                                          About
                                          </a>
                                       </li>
-                                      <li class="mb-2"><a href="#" class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
+                                      <li class="mb-2"><a href="{{url('terms-of-use')}}" class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
                                          Terms of use
                                          </a>
                                       </li>
-                                      <li class="mb-2"><a href="#" class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
+                                      <li class="mb-2"><a href="{{url('privacy-policy')}}" class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
                                          Privacy policy
                                          </a>
                                       </li>
@@ -650,11 +650,11 @@
                                        class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
                                        About
                                     </a></li>
-                                 <li class="mb-2"><a href="#"
+                                 <li class="mb-2"><a href="{{url('terms-of-use')}}"
                                        class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
                                        Terms of use
                                     </a></li>
-                                 <li class="mb-2"><a href="#"
+                                 <li class="mb-2"><a href="{{url('privacy-policy')}}"
                                        class="font-weight-bold text-uppercase mr-5 footerItem_qp0ms">
                                        Privacy policy
                                     </a></li>
@@ -803,18 +803,18 @@
                   <div class="col-md-2" data-v-64a0caf0>
                     <div class="h5" data-v-64a0caf0>Legal</div>
                     <ul class="list-unstyled footer-links" data-v-64a0caf0>
-                      <li data-v-64a0caf0><a href="" target="_blank" rel="nofollow"
+                      <li data-v-64a0caf0><a href="{{url('terms-of-use')}}" target="_blank" rel="nofollow"
                           data-v-64a0caf0>Terms of Use</a></li>
-                      <li data-v-64a0caf0><a href="" target="_blank" rel="nofollow"
+                      <li data-v-64a0caf0><a href="{{url('privacy-policy')}}" target="_blank" rel="nofollow"
                           data-v-64a0caf0>Privacy Policy</a></li>
                       <li data-v-64a0caf0><a href="" target="_blank" rel="nofollow"
                           data-v-64a0caf0>License Agreement</a></li>
-                      <li data-v-64a0caf0><a href="" target="_blank" rel="nofollow"
+                      <li data-v-64a0caf0><a href="{{url('contributer-terms')}}" target="_blank" rel="nofollow"
                           data-v-64a0caf0>Contributor Terms</a></li>
                       <li data-v-64a0caf0><a href="" target="_blank" rel="nofollow"
                           data-v-64a0caf0>Support Center</a></li>
                       <li data-v-64a0caf0><a href="" target="_blank" rel="nofollow"
-                          data-v-64a0caf0>Iconscout Community</a></li>
+                          data-v-64a0caf0>Iconscart Community</a></li>
                     </ul>
                   </div>
                   <div class="col-md-4" data-v-64a0caf0>
