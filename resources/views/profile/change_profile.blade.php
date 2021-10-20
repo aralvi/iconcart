@@ -4,13 +4,13 @@
 @section('content')
 
 <!-- CONTAINER FLUID -->
-<div class="container-fluid">
+<div class="container ">
 
 	<!-- ROW 1 -->
     <div class="row  bg-light" style="border-radius: 10px;padding:10px;">
     	<div class="col-md-12">
     		@if ($profile->avatar != '')
-	    		<img src="{{ asset($profile->avatar)}}" id="avatar" style="width: 150px; height: 150px; float: left; border-radius: 50%; margin-right: 25px;">
+	    		<img src="{{ asset('public/'.$profile->avatar)}}" id="avatar" style="width: 150px; height: 150px; float: left; border-radius: 50%; margin-right: 25px;">
 	    	@else
 	    		<img src="{{ asset('uploads/images/user/avatars/default.jpg')}}" id="avatar" style="width: 150px; height: 150px; float: left; border-radius: 50%; margin-right: 25px;">
 	    	@endif
@@ -84,3 +84,27 @@
 <!--END CONTAINER FLUID-->
 
 @endsection
+@push('scripts')
+    <script>
+        function readURL(input, id) {
+    for (let index = 0; index <= input.files.length - 1; index++) {
+        var size = input.files[index].size; // this is in bytes
+        if (size > 2000000) {
+            $(input).parent().parent().siblings("p").html('Image size is more than required');
+            $(input).val(null);
+        } else {
+            if (id == null) {
+                $('.progress').removeClass('d-none');
+                $('#fileName').html(input.files[index].name + ' file uploaded successfuly!');
+            }
+            var reader = new FileReader();
+            reader.onload = function(e) {
+
+                $("#" + id).attr("src", e.target.result);
+            };
+            reader.readAsDataURL(input.files[index]);
+        }
+    }
+}
+    </script>
+@endpush

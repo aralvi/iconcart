@@ -505,11 +505,11 @@
                        </div>
                        <div class="py-9 d-flex align-items-center justify-content-center cartItems_3GXQP"><img
                           src="https://cdna.iconscout.com/img/b8ddcb5.png" width="180" loading="lazy"></div>
-  
+
                     </ul>
                  </div>
               </li>
-                     
+
               <li class="mr-5">
                  <div class="dropdown b-dropdown btn-group">
                     <button aria-haspopup="true" aria-expanded="false" type="button"
@@ -530,6 +530,7 @@
                           </button>
                        </li>
                        @else
+                       <li><a class="dropdown-item" href="{{url('vendor/profile')}}">Profile</a></li>
                        <li role="presentation" class="px-2"><button role="menuitem" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit()" type="button" class="dropdown-item">
                           Log Out
@@ -538,11 +539,11 @@
                               @csrf
                           </form>
                        </li>
-                            
-                                 
+
+
 
                         @endguest
-                     
+
                     </ul>
                  </div>
               </li>
@@ -586,7 +587,7 @@
                            <ul class="list-unstyled">
                               <li class="mb-2"><a href="#" class="text-dark text-left listitem_3tUbD">
                                     3D Illustrations
-   
+
                                     <img
                                        src="https://cdn3d.iconscout.com/3d/premium/thumb/bullhorn-2891377-2409784.png?w=40"
                                        width="20" class="img-fluid align-text-bottom"></a></li>
@@ -737,13 +738,13 @@
             class="d-none d-sm-flex ml-5"> <img
             src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzciIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzNyAzMiIgZmlsbD0ibm9uZSIKICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xOC4yODU3IDIxLjcxNDNDMTUuMTI5OCAyMS43MTQzIDEyLjU3MTQgMTkuMTU1OSAxMi41NzE0IDE2QzEyLjU3MTQgMTIuODQ0MSAxNS4xMjk4IDEwLjI4NTcgMTguMjg1NyAxMC4yODU3QzIxLjQ0MTYgMTAuMjg1NyAyNCAxMi44NDQxIDI0IDE2QzI0IDE5LjE1NTkgMjEuNDQxNiAyMS43MTQzIDE4LjI4NTcgMjEuNzE0M1pNMzUuOTcxOSAxNC4xQzM2LjM3MTYgMTQuNyAzNi41NzE0IDE1LjMgMzYuNTcxNCAxNkMzNi41NzE0IDE2LjcgMzYuMzcxNiAxNy40IDM1Ljk3MTkgMTcuOUwzMC40NzYyIDI3LjlDMjkuOTc2NiAyOC45IDI4LjU3NzcgMjguOSAyNy45NzgxIDI4TDI1LjA4MDQgMjMuNUMyNC43ODA2IDIzIDI0Ljg4MDYgMjIuMyAyNS4yODAzIDIxLjhDMjYuODc5IDE5LjkgMjcuNjc4NCAxNy40IDI3LjI3ODcgMTQuNkMyNi42NzkyIDEwLjggMjMuNTgxNiA3LjYgMTkuNzg0NSA3QzEzLjM4OTUgNS45IDcuOTkzNzUgMTEuNiA5LjM5MjY2IDE4LjFDOS45OTIxOSAyMC45IDEyLjE5MDUgMjMuNCAxNC44ODg0IDI0LjVDMTYuOTg2NyAyNS40IDE4Ljk4NTIgMjUuNCAyMC43ODM4IDI0LjlDMjEuMjgzNCAyNC43IDIxLjk4MjggMjUgMjIuMjgyNiAyNS41TDI0Ljk4MDUgMjkuOEMyNS41OCAzMC43IDI0Ljg4MDYgMzIgMjMuNzgxNCAzMkgxMC4yOTJDOC45OTI5NyAzMiA3Ljg5MzgzIDMxLjMgNy4yOTQzIDMwLjJMMC41OTk1MzIgMTcuOUMwLjE5OTg0NCAxNy40IDAgMTYuNyAwIDE2QzAgMTUuMyAwLjE5OTg0NCAxNC43IDAuNTk5NTMyIDE0LjFMNy4yOTQzIDEuOEM3Ljg5MzgzIDAuNyA4Ljk5Mjk3IDAgMTAuMjkyIDBIMjYuMjc5NUMyNy41Nzg1IDAgMjguNjc3NiAwLjcgMjkuMjc3MSAxLjhMMzUuOTcxOSAxNC4xWiIgZmlsbD0iIzY2NjZGRiIvPgo8L3N2Zz4K"
             alt="iconscout-logo" width="30" class="d-flex d-sm-none ml-8"></a>
-      
+
       <!---->
    </div>
   </header>
 </div>
 
- 
+
   @yield('content')
 
 
@@ -945,7 +946,7 @@
 //     });
 //     })
 function forSubmit(formID,formType) {
-   
+
     $(formID).on('submit',function(e){
             e.preventDefault();
            var form = $(this);
@@ -972,9 +973,9 @@ function forSubmit(formID,formType) {
                      }
 
                   });
-         }) 
+         })
 }
-   
+
   </script>
 
   @stach('scripts')

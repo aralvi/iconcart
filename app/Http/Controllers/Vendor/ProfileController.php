@@ -50,10 +50,10 @@ class ProfileController extends Controller
         $profile->avatar = $image_destination_folder.'/'.$image_destination_name;
         $profile->save();
 
-        if (!empty($old_avatar)) {
-            unlink(public_path("$old_avatar"));
-        }
-        return redirect('profile')->with('success', 'Profile image updated successfully!');
+        // if (!empty($old_avatar)) {
+        //     unlink(public_path("$old_avatar"));
+        // }
+        return back()->with('success', 'Profile image updated successfully!');
     }
 
     /**
