@@ -385,7 +385,7 @@
                 <div class="uploadrightdiv">
                     <div class="uplrin text-center" id="modalForm">
                         <form
-                            action="{{$products[0]->category_id == 1 ?  route('icons.upload.more'):($products[0]->category_id == 2 ?route('photos.upload.more'): route('icons.drafts')) }}"
+                            action="{{$products[0]->category_id == 1 ?  route('icons.upload.more'):($products[0]->category_id == 2 ?route('photos.upload.more'): route('illustration.upload.more')) }}"
                             method="POST"
                             enctype="multipart/form-data"
                             class="w-100 h-100"
@@ -466,7 +466,11 @@
               contentType: false,
               processData: false,
               success: function(response){
-                  console.log(response);
+                    $('#body').removeClass('modal-open').removeAttr('styke');
+                    $("#image-upload").trigger("reset");
+                    $('.upload').removeClass("drop done")
+                    $('.modal-backdrop.fade.show').hide()
+                    $('#exampleModal').toggle('modal')
                     response.products.map((item, index) => {
                         var key = Number(index)+Number('{{$key}}')+1;
                         var tags ='';
@@ -521,11 +525,7 @@
 
             </div>
                     `);
-                    $("#image-upload").trigger("reset");
-                    $('.modal-backdrop.fade.show').remove()
-                    $('#exampleModal').toggle('modal')
 
-            $('.upload').removeClass("drop done")
                     });
               },
            });

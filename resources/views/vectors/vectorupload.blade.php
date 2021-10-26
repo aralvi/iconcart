@@ -200,17 +200,9 @@
       <p class="uploadp">Below are the file types which required for each illustration files</p>
       <div class="row ml-1">
         <div class="uploadrowbt">
-          <button class="btn uploadexmbt">SVG</button>    
+          <button class="btn uploadexmbt">Zip</button>
         </div>
-        <div class="uploadrowbt">
-          <button class="btn uploadexmbt">PNG</button>    
-        </div>
-        <div class="uploadrowbt">
-          <button class="btn uploadexmbt">EPS</button>    
-        </div>
-        <div class="uploadrowbt">
-          <button class="btn uploadexmbt">AI</button>    
-        </div>
+
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.
@@ -235,7 +227,8 @@
             {{-- <input type="file" name="vector">
             <button type="submit" class="btn btn-sm btn-success">Upload</button> --}}
             <div class="upload">
-  <input type="file" id="file-input" name="icons_upload[]" multiple title="" class="drop-here">
+  <input type="hidden" name="p_id" value="{{rand()}}">
+              <input type="file" id="file-input" name="file_uploads[]" multiple title="" class="drop-here">
   <div class="text text-drop">
                     <span class="h2 d-block">➕</span>
                     <div class="pt-3 w-75 m-auto">Click or Drag and Drop to upload icons</div>

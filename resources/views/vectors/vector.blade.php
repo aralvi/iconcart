@@ -26,7 +26,7 @@
                     <div>
                       <img src="{{asset('assets/images/c3.PNG')}}"  alt="">
                       <h3 class="indboxh3">Live in Store</h3>
-                      <p class="indboxp1">{{ $vectors->count() }} vectors</p>
+                      <p class="indboxp1">0 vectors</p>
                     </div>
                  </a>
              </div>

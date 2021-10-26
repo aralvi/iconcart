@@ -19,7 +19,7 @@ class CategoryTableSeeder extends Seeder
                 'name'=>'photo'
             ],
             [
-                'name'=>'vector'
+                'name'=>'illustration'
             ]
         ]);
     }

@@ -9,6 +9,7 @@ use App\Category;
 use App\Suggested;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use ZipArchive;
 
 class FileController extends Controller
 {
@@ -169,7 +170,7 @@ class FileController extends Controller
             'file_uploads'  => 'required|array',
             'file_uploads.*'  => 'image|mimes:png,jpg',
           ]);
-$products=[];
+        $products=[];
         $tagsSuggteds=[];
         foreach ($request->file('file_uploads') as $key => $photo) {
              $imagePath     = $photo;
@@ -214,33 +215,129 @@ $products=[];
 
     public function vectorUpload(Request $request)
     {
-        $category  = Category::where('name','vector')->first();
+        $category  = Category::where('name','illustration')->first();
         $request->validate([
-            'vector' => 'required|mimes:zip',
+            'file_uploads'  => 'required|array',
+            'file_uploads.*' => 'required|mimes:zip',
           ]);
-          if ($request->file('vector')) {
-            $imagePath    = $request->file('vector');
-            $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension    = $request->file('vector')->getClientOriginalExtension();
-            $fileNames    = explode(",",$imageName);
-            $fileEx       = $fileNames[0].'.'.$extension;
-            $path         = $request->file('vector')->move(public_path('images/icons'),$fileEx);
-            $suggetedTags = Suggested::create(['tags'=>$imageName]);
-          }
+        $products = [];
+        $tagsSuggteds = [];
+          foreach ($request->file('file_uploads') as $zipFile) {
+            // $imagePath    = $request->file('file_uploads');
+            // $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
+            // $extension    = $request->file('file_uploads')->getClientOriginalExtension();
+            // $fileNames    = explode(",",$imageName);
+            // $fileEx       = $fileNames[0].'.'.$extension;
+            // $path         = $request->file('file_uploads')->move(public_path('images/icons'),$fileEx);
+            $za = new ZipArchive();
+            $za->open($zipFile);
+            $za->extractTo(getcwd() . 'temp/');
+            for ($i = 0; $i < $za->numFiles; $i++) {
+                $stat = $za->statIndex($i);
+                if (strpos(basename($stat['name']), '.zip') !== false) {
+                    $newZip = new ZipArchive();
+                    $newZip->open(getcwd() . 'temp/' . $stat['name']);
+                    $newZip->extractTo(public_path('images/icons'));
+                    for ($k = 0; $k < $newZip->numFiles; $k++) {
+                        $fileName = $newZip->statIndex($k);
+                        if (strpos(basename($fileName['name']), '.jpg') !== false || strpos(basename($fileName['name']), '.png') !== false) {
+                            $product     =   new Product();
+                            $product->user_id       =  Auth::user()->id;
+                            $product->p_id       =  $request->p_id;
+                            $product->name          =  basename($fileName['name']);
+                            $product->media          =  basename($fileName['name']);
+                            $product->image        =  basename($fileName['name']);
+                            $product->category_id   =  $category->id;
+                            $product->tags          =  basename($fileName['name']);
+                            $product->save();
 
-        $products           =   Product::create([
-            'name'          =>  $fileEx,
-            'image'         =>  $fileNames[0],
-            'category_id'   =>  $category->id,
-            'tags'          =>  $imageName,
-        ]);
-        $tagsSuggteds      = explode(",",$imageName);
+                            $suggetedTags = new Suggested();
+                            $suggetedTags->product_id = $product->id;
+                            $suggetedTags->tags = basename($fileName['name']);
+                            $suggetedTags->save();
+                            // array_push($products, $product);
+                            $tagsSuggted      = explode(",", basename($fileName['name']));
+                            // array_push($tagsSuggteds, $tagsSuggted);
+                            // dd($products, $tagsSuggteds);
+                        }
+                    }
+                    $newZip->close();
+                }
+            }
+            $za->close();
+          }
+        $products = Product::where('status', '0')->where('p_id', $request->p_id)->get();
+        $productsArray = Product::where('status', '0')->where('p_id', $request->p_id)->pluck('id')->toArray();
+
+        $tagsSuggteds = Suggested::whereIn('product_id', $productsArray)->get();
+
         // dd($products);
         if(isset($products)) {
             return view('icons.drafts',compact('products','tagsSuggteds'));
         }
     }
+     public function vectorUploadMore(Request $request)
+    {
+        $category  = Category::where('name','illustration')->first();
+        $request->validate([
+            'file_uploads'  => 'required|array',
+            'file_uploads.*' => 'required|mimes:zip',
+          ]);
+        $products = [];
+        $tagsSuggteds = [];
+          foreach ($request->file('file_uploads') as $zipFile) {
+            // $imagePath    = $request->file('file_uploads');
+            // $imageName    = pathinfo($imagePath->getClientOriginalName(), PATHINFO_FILENAME);
+            // $extension    = $request->file('file_uploads')->getClientOriginalExtension();
+            // $fileNames    = explode(",",$imageName);
+            // $fileEx       = $fileNames[0].'.'.$extension;
+            // $path         = $request->file('file_uploads')->move(public_path('images/icons'),$fileEx);
+            $za = new ZipArchive();
+            $za->open($zipFile);
+            $za->extractTo(getcwd() . 'temp/');
+            for ($i = 0; $i < $za->numFiles; $i++) {
+                $stat = $za->statIndex($i);
+                if (strpos(basename($stat['name']), '.zip') !== false) {
+                    $newZip = new ZipArchive();
+                    $newZip->open(getcwd() . 'temp/' . $stat['name']);
+                    $newZip->extractTo(public_path('images/icons'));
+                    for ($k = 0; $k < $newZip->numFiles; $k++) {
+                        $fileName = $newZip->statIndex($k);
+                        if (strpos(basename($fileName['name']), '.jpg') !== false || strpos(basename($fileName['name']), '.png') !== false) {
+                            $product     =   new Product();
+                            $product->user_id       =  Auth::user()->id;
+                            $product->p_id       =  $request->p_id;
+                            $product->name          =  basename($fileName['name']);
+                            $product->media          =  basename($fileName['name']);
+                            $product->image        =  basename($fileName['name']);
+                            $product->category_id   =  $category->id;
+                            $product->tags          =  basename($fileName['name']);
+                            $product->save();
 
+                            $suggetedTags = new Suggested();
+                            $suggetedTags->product_id = $product->id;
+                            $suggetedTags->tags = basename($fileName['name']);
+                            $suggetedTags->save();
+                            array_push($products, $product);
+                            $tagsSuggted      = explode(",", basename($fileName['name']));
+                            array_push($tagsSuggteds, $tagsSuggted);
+                        }
+                    }
+                    $newZip->close();
+                }
+            }
+            $za->close();
+          }
+        // $products = Product::where('status', '0')->where('p_id', $request->p_id)->get();
+        // $productsArray = Product::where('status', '0')->where('p_id', $request->p_id)->pluck('id')->toArray();
+
+        // $tagsSuggteds = Suggested::whereIn('product_id', $productsArray)->get();
+
+        // dd($products);
+        if(isset($products)) {
+             return response()->json(['products'=>$products,'tagsSuggteds'=>$tagsSuggteds]);
+        }
+    }
     public function saveDrafts(Request $request)
     {
         foreach ($request->id as $key => $id) {
@@ -296,7 +393,7 @@ $products=[];
     public function vectorDraftShow()
     {
          $products = Product::where('status','1')->whereHas('category',function($q){
-            $q->where('name','=','vector');
+            $q->where('name','=','illustration');
         })->get();
         return view('vectors.vector-draft-show',compact('products'));
 
@@ -335,10 +432,15 @@ $products=[];
     }
     public function vectorEdit($id)
     {
-        $products      = Product::where(['id'=>$id,'status'=>'1'])->whereHas('category',function($q){
-            $q->where('name','=','vector');
+        $products=[];
+        // $tagsSuggteds=[];
+        $product      = Product::where('id',$id)->whereIn('status',['0','1'])->whereHas('category',function($q){
+            $q->where('name','=','illustration');
         })->first();
-        $tagsSuggteds  = explode(",",$products->tags);
+        array_push($products,$product);
+        $tagsSuggted  = explode(",",$product->tags);
+        // array_push($tagsSuggteds,$tagsSuggted);
+        $tagsSuggteds = Suggested::where('product_id',$product->id)->get();
         return view('icons.drafts',compact('products','tagsSuggteds'));
 
     }

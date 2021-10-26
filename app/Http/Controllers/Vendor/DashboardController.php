@@ -18,7 +18,7 @@ class DashboardController extends Controller
            $q->where('name', '=', 'photo');
         })->get();
         $vectors  = Product::whereIn('status',['0','1'])->whereHas('category', function($q){
-            $q->where('name', '=', 'vector');
+            $q->where('name', '=', 'illustration');
         })->get();
       return view('home',compact('icons','photos','vectors'));
     }
@@ -45,11 +45,11 @@ class DashboardController extends Controller
 
     public function  vectorCounter()
     {
-        $vectors    = Product::where('status',1)->whereHas('category', function($q){
-            $q->where('name', '=', 'vector');
+        $vectors    = Product::whereIn('status',['0','1'])->whereHas('category', function($q){
+            $q->where('name', '=', 'illustration');
        })->get();
         $reviews  = Product::where('status',3)->whereHas('category', function($q){
-            $q->where('name', '=', 'vector');
+            $q->where('name', '=', 'illustration');
        })->get();
         return view('vectors.vector',compact('vectors','reviews'));
     }

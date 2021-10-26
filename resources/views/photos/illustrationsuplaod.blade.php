@@ -233,7 +233,7 @@
             <button type="submit" class="btn btn-sm btn-success">Upload</button>
         </form>
 </label> --}}
- <form action="{{ route('illustrations.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload" >
+ <form action="{{ route('photos.drafts') }}" method="POST" enctype="multipart/form-data" class="w-100 h-100" id="image-upload" >
             @csrf
             <input type="hidden" name="p_id" value="{{rand()}}">
               <div class="upload">
